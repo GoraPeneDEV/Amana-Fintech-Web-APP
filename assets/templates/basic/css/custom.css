@@ -1,0 +1,539 @@
+/* Copy Animation */
+.base-color {
+    color: hsl(var(--main)) !important;
+}
+
+.copyInput {
+    display: inline-block;
+    line-height: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+    -webkit-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+
+.copied::after {
+    position: absolute;
+    top: 8px;
+    right: 12%;
+    width: 100px;
+    display: block;
+    content: "COPIED";
+    font-size: 1em;
+    padding: 5px 5px;
+    color: #fff;
+    background-color: #FF7000;
+    border-radius: 3px;
+    opacity: 0;
+    will-change: opacity, transform;
+    animation: showcopied 1.5s ease;
+}
+
+@keyframes showcopied {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: translateX(40%);
+    }
+
+    70% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+
+
+.cookies-card {
+    width: 375px;
+    padding: 25px;
+    color: #1E2337;
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 999999;
+    transition: all .5s;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 18px rgb(0 0 0 / 20%);
+    border-radius: 20px;
+}
+
+.cookies-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.cookies-card__title {
+    font-size: inherit;
+
+}
+
+.cookies-card__close {
+    font-size: 40px;
+    line-height: 1;
+    cursor: pointer;
+    color: #797878;
+    transition: all 0.2s;
+}
+
+.cookies-card__close:hover {
+    color: #000;
+
+}
+
+.cookies-card__icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background-color: #6e6f70;
+    color: #fff;
+    font-size: 32px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cookies-card__content {
+    margin-bottom: 0;
+    font-size: 13px;
+    margin-bottom: 24px;
+}
+
+.cookies-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.cookies-card__btn-outline {
+    text-decoration: none;
+    padding: 12px 20px;
+    color: #001E00;
+
+}
+
+.cookies-card__btn {
+    color: #fff !important;
+    text-decoration: none;
+    padding: 8px 35px;
+    margin: 3px 5px;
+    display: inline-block;
+    border-radius: 999px;
+    background-color: #363636;
+    transition: all 0.2s;
+}
+
+.cookies-card__btn:hover {
+    background-color: #0e0e0e;
+}
+
+
+
+
+@media (max-width: 767px) {
+    .cookies-card {
+        width: calc(100% - 20px);
+        left: 10px;
+        bottom: 0;
+        font-size: 14px;
+        padding: 15px;
+    }
+}
+
+
+.cookies-card.hide {
+    bottom: -500px !important;
+}
+
+.radius--10px {
+    border-radius: 10px;
+}
+
+.hover-input-popup {
+    position: relative;
+}
+
+.input-popup {
+    display: none;
+}
+
+.hover-input-popup .input-popup {
+    display: block;
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    width: 280px;
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    transform: translateX(-50%);
+    transition: all 0.3s;
+}
+
+.input-popup::after {
+    position: absolute;
+    content: '';
+    bottom: -19px;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 10px 10px 10px 10px;
+    border-style: solid;
+    border-color: transparent transparent #1a1a1a transparent;
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.input-popup p {
+    padding-left: 20px;
+    position: relative;
+}
+
+.input-popup p::before {
+    position: absolute;
+    content: '';
+    font-family: 'Line Awesome Free';
+    font-weight: 900;
+    left: 0;
+    top: 4px;
+    line-height: 1;
+    font-size: 18px;
+}
+
+.input-popup p.error {
+    text-decoration: line-through;
+}
+
+.input-popup p.error::before {
+    content: "\f057";
+    color: #ea5455;
+}
+
+.input-popup p.success::before {
+    content: "\f058";
+    color: #28c76f;
+}
+
+
+
+.show-filter {
+    display: none;
+}
+
+@media(max-width:767px) {
+    .responsive-filter-card {
+        display: none;
+        transition: none;
+    }
+
+    .show-filter {
+        display: block;
+    }
+}
+
+
+button .spinner-border {
+    --bs-spinner-width: 1.5rem;
+    --bs-spinner-height: 1.5rem;
+}
+
+
+
+
+.button-loader .spinner-border {
+    --bs-spinner-width: 1rem;
+    --bs-spinner-height: 1rem;
+}
+
+.full-page-loader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: hsl(var(--black) / .5);
+    z-index: 9999999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lds-spinner,
+.lds-spinner div,
+.lds-spinner div:after {
+    box-sizing: border-box;
+}
+
+.lds-spinner {
+    color: hsl(var(--white));
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-spinner div {
+    transform-origin: 40px 40px;
+    animation: lds-spinner 1.2s linear infinite;
+}
+
+.lds-spinner div:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 3.2px;
+    left: 36.8px;
+    width: 6.4px;
+    height: 17.6px;
+    border-radius: 20%;
+    background: currentColor;
+}
+
+.lds-spinner div:nth-child(1) {
+    transform: rotate(0deg);
+    animation-delay: -1.1s;
+}
+
+.lds-spinner div:nth-child(2) {
+    transform: rotate(30deg);
+    animation-delay: -1s;
+}
+
+.lds-spinner div:nth-child(3) {
+    transform: rotate(60deg);
+    animation-delay: -0.9s;
+}
+
+.lds-spinner div:nth-child(4) {
+    transform: rotate(90deg);
+    animation-delay: -0.8s;
+}
+
+.lds-spinner div:nth-child(5) {
+    transform: rotate(120deg);
+    animation-delay: -0.7s;
+}
+
+.lds-spinner div:nth-child(6) {
+    transform: rotate(150deg);
+    animation-delay: -0.6s;
+}
+
+.lds-spinner div:nth-child(7) {
+    transform: rotate(180deg);
+    animation-delay: -0.5s;
+}
+
+.lds-spinner div:nth-child(8) {
+    transform: rotate(210deg);
+    animation-delay: -0.4s;
+}
+
+.lds-spinner div:nth-child(9) {
+    transform: rotate(240deg);
+    animation-delay: -0.3s;
+}
+
+.lds-spinner div:nth-child(10) {
+    transform: rotate(270deg);
+    animation-delay: -0.2s;
+}
+
+.lds-spinner div:nth-child(11) {
+    transform: rotate(300deg);
+    animation-delay: -0.1s;
+}
+
+.lds-spinner div:nth-child(12) {
+    transform: rotate(330deg);
+    animation-delay: 0s;
+}
+
+@keyframes lds-spinner {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.gateway-card .payment-system-list {
+    --thumb-width: 80px;
+    --thumb-height: 32px;
+    --radio-size: 20px;
+    border-radius: 5px;
+    height: 100%;
+}
+
+.gateway-card .payment-system-list.is-scrollable {
+    max-height: min(405px, 70vh);
+    overflow-x: auto;
+    padding-block: 4px;
+    padding-right: 8px;
+}
+
+.gateway-card .payment-system-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.gateway-card .payment-system-list::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--base));
+    border-radius: 10px;
+}
+
+.gateway-card .payment-item {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding: 16px 16px;
+    border: 1px solid hsl(var(--border-color));
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.gateway-card .payment-item__info {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+.gateway-card .payment-item__check {
+    width: var(--radio-size);
+    height: var(--radio-size);
+    border: 1px solid hsl(var(--base));
+    display: inline-block;
+    border-radius: 100%;
+}
+
+.gateway-card .payment-item__name {
+    padding-left: 10px;
+    width: calc(100% - var(--radio-size));
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    font-weight: 600;
+    color: hsl(var(--black)/0.65);
+}
+
+.gateway-card .payment-item__thumb {
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    text-align: right;
+    padding-left: 10px;
+    flex-shrink: 0;
+}
+
+.gateway-card .payment-item__thumb img {
+    max-width: var(--thumb-width);
+    max-height: var(--thumb-height);
+    -o-object-fit: cover;
+    object-fit: cover;
+    width: 100%;
+}
+
+.gateway-card .payment-item__thumb:has(.text) {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+
+.gateway-card .payment-item__btn {
+    font-size: 0.875rem;
+    color: hsl(var(--success));
+    font-weight: 600;
+}
+
+.gateway-card .payment-item__check {
+    border: 1px solid hsl(var(--border-color));
+}
+
+.gateway-card .payment-item:has(.payment-item__radio:checked) .payment-item__check {
+    border: 4px solid hsl(var(--base));
+}
+
+.gateway-card .payment-item__right {
+    width: 100%;
+}
+
+
+.deposit-info {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.deposit-info * {
+    font-weight: 600;
+}
+
+.deposit-info__input * {
+    font-weight: 400;
+}
+
+.total-amount {
+    border-top: 1px solid hsl(var(--base-two)/0.08);
+}
+
+.withdrawmethod-img {
+    height: 45px;
+    width: 45px;
+}
+
+.withdrawmethod-img img {
+    height: 100% !important;
+    width: 100% !important;
+}

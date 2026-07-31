@@ -1,0 +1,1 @@
+var firebaseConfig = {"apiKey":"AIzaSyC483wZ40E6Cf9QzyNmvI6Yw4a5FzT3H1A","authDomain":"ovopay-app.firebaseapp.com","projectId":"ovopay-app","storageBucket":"ovopay-app.firebasestorage.app","messagingSenderId":"364630175808","appId":"1:364630175808:web:79a615ef8535a527786fa5","measurementId":"G-F2J0LRDF3L"}

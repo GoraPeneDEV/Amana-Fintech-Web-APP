@@ -1,1 +1,0 @@
-<x-ovo-form identifier="id" identifierValue="{{ $form->id }}" />
