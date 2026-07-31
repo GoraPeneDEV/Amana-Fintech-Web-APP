@@ -1,0 +1,3097 @@
+{
+    "main": [
+        {
+            "keyword": [
+                "Dashboard",
+                "Home",
+                "Panel",
+                "Admin",
+                "Control center",
+                "Overview",
+                "Main hub",
+                "Management hub",
+                "Administrative hub",
+                "Central hub",
+                "Command center",
+                "Administrator portal",
+                "Centralized interface",
+                "Admin console",
+                "Management dashboard",
+                "Main screen",
+                "Administrative dashboard",
+                "Command dashboard",
+                "Main control panel"
+            ],
+            "title": "Dashboard",
+            "icon": "las la-tachometer-alt",
+            "route_name": "admin.dashboard",
+            "permission": [
+                "view dashboard"
+            ]
+        },
+        {
+            "title": "Manage Send Money",
+            "icon": "las la-paper-plane rotate-45",
+            "menu_active": [
+                "admin.send.money.history",
+                "admin.send.money.charge.setting"
+            ],
+            "permission": [
+                "view send money",
+                "manage send money charge"
+            ],
+            "submenu": [
+                {
+                    "keyword": [
+                        "send money",
+                        "send money history",
+                        "send money log"
+                    ],
+                    "title": "History",
+                    "route_name": "admin.send.money.history",
+                    "menu_active": "admin.send.money.history",
+                    "permission": [
+                        "view send money"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "send money",
+                        "send money setting",
+                        "send money charge setting",
+                        "send money configuration"
+                    ],
+                    "title": "Charge Setting",
+                    "route_name": "admin.send.money.charge.setting",
+                    "menu_active": "admin.send.money.charge.setting",
+                    "permission": [
+                        "manage send money charge"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Manage Cash out",
+            "icon": "las la-hand-holding-usd",
+            "menu_active": [
+                "admin.cashout.history",
+                "admin.cashout.charge.setting"
+            ],
+            "permission": [
+                "view cash out",
+                "manage cash out charge"
+            ],
+            "submenu": [
+                {
+                    "keyword": [
+                        "cash out",
+                        "cash out history",
+                        "cash out log"
+                    ],
+                    "title": "History",
+                    "route_name": "admin.cashout.history",
+                    "menu_active": "admin.cashout.history",
+                    "permission": [
+                        "view cash out"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "cash out",
+                        "cash out charge setting",
+                        "cash out configuration"
+                    ],
+                    "title": "Charge Setting",
+                    "route_name": "admin.cashout.charge.setting",
+                    "menu_active": "admin.cashout.charge.setting",
+                    "permission": [
+                        "manage cash out charge"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Manage CashIn",
+            "icon": "las la-wallet",
+            "menu_active": [
+                "admin.cashin.history",
+                "admin.cashin.charge.setting"
+            ],
+            "permission": [
+                "view cash in",
+                "manage cash in charge"
+            ],
+            "submenu": [
+                {
+                    "keyword": [
+                        "cash in",
+                        "cash in history",
+                        "cash in log"
+                    ],
+                    "title": "History",
+                    "route_name": "admin.cashin.history",
+                    "menu_active": "admin.cashin.history",
+                    "permission": [
+                        "view cash in"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "cash in",
+                        "cash in charge setting",
+                        "cash in configuration"
+                    ],
+                    "title": "Charge Setting",
+                    "route_name": "admin.cashin.charge.setting",
+                    "menu_active": "admin.cashin.charge.setting",
+                    "permission": [
+                        "manage cash in charge"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Manage Investment",
+            "icon": "las la-file-invoice-dollar",
+            "menu_active": [
+                "admin.investment.history",
+                "admin.investment.details",
+                "admin.investment.plan.index",
+                "admin.investment.time.index",
+                "admin.investment.interest.history"
+            ],
+            "permission": [
+                "view investment",
+                "manage investment plan",
+                "manage investment time"
+            ],
+            "submenu": [
+                {
+                    "keyword": [
+                        "investment plan",
+                        "investment history",
+                        "investment log"
+                    ],
+                    "title": "Investment History",
+                    "route_name": "admin.investment.history",
+                    "menu_active": "admin.investment.history",
+                    "permission": [
+                        "view investment"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "investment",
+                        "investment setting",
+                        "investment plan",
+                        "price plan",
+                        "investment price"
+                    ],
+                    "title": "Investment Plan",
+                    "route_name": "admin.investment.plan.index",
+                    "menu_active": "admin.investment.plan.index",
+                    "permission": [
+                        "manage investment plan"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "investment",
+                        "investment setting",
+                        "investment time",
+                        "price plan"
+                    ],
+                    "title": "Investment Time",
+                    "route_name": "admin.investment.time.index",
+                    "menu_active": "admin.investment.time.index",
+                    "permission": [
+                        "manage investment time"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "investment",
+                        "investment setting",
+                        "investment time",
+                        "price plan"
+                    ],
+                    "title": "Interest History",
+                    "route_name": "admin.investment.interest.history",
+                    "menu_active": "admin.investment.interest.history",
+                    "permission": [
+                        "view investment"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Mobile Recharge",
+            "icon": "las la-mobile-alt",
+            "menu_active": [
+                "admin.airtime.*"
+            ],
+            "permission": [
+                "view airtime",
+                "manage airtime operator"
+            ],
+            "submenu": [
+                {
+                    "keyword": [
+                        "country",
+                        "country list",
+                        "airtime country"
+                    ],
+                    "title": "Countries",
+                    "route_name": "admin.airtime.countries",
+                    "menu_active": "admin.airtime.countries",
+                    "permission": [
+                        "manage airtime operator"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "Topup History",
+                        "All Topup",
+                        "Airtime History"
+                    ],
+                    "title": "Topup History",
+                    "route_name": "admin.airtime.history",
+                    "menu_active": "admin.airtime.history",
+                    "permission": [
+                        "view airtime"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Manage Utility Bills",
+            "icon": "las la-file-invoice-dollar",
+            "menu_active": [
+                "admin.utility.bill.*",
+                "admin.utility.bill.company.*",
+                "admin.bill.category.all"
+            ],
+            "permission": [
+                "view utility bill",
+                "manage utility bill charge",
+                "manage bill category",
+                "manage bill company",
+                "approve utility bill",
+                "reject utility bill"
+            ],
+            "counters": [
+                "processingUtilityBillCount"
+            ],
+            "submenu": [
+                {
+                    "keyword": [
+                        "processing utility bills",
+                        "api utility bills",
+                        "automatic utility bills"
+                    ],
+                    "title": "Processing Bills",
+                    "route_name": "admin.utility.bill.processing",
+                    "menu_active": "admin.utility.bill.processing",
+                    "counter": "processingUtilityBillCount",
+                    "permission": [
+                        "view utility bill"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "approved utility Bills",
+                        "approved utility Bills history",
+                        "approved utility Bills log"
+                    ],
+                    "title": "Successful Bills",
+                    "route_name": "admin.utility.bill.approved",
+                    "menu_active": "admin.utility.bill.approved",
+                    "permission": [
+                        "view utility bill"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "rejected utility Bills",
+                        "rejected utility Bills history",
+                        "rejected utility Bills log"
+                    ],
+                    "title": "Refunded Bills",
+                    "route_name": "admin.utility.bill.refunded",
+                    "menu_active": "admin.utility.bill.refunded",
+                    "permission": [
+                        "view utility bill"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "all utility Bills",
+                        "all utility Bills history",
+                        "all utility Bills log"
+                    ],
+                    "title": "All Bills",
+                    "route_name": "admin.utility.bill.all",
+                    "menu_active": "admin.utility.bill.all",
+                    "permission": [
+                        "view utility bill"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "country",
+                        "country list",
+                        "utility country",
+                        "Utility Bill Setting",
+                        "bill setting",
+                        "company setting",
+                        "utility company setting",
+                        "electricity bill",
+                        "internet bill",
+                        "telephone bill",
+                        "configure bills",
+                        "company add",
+                        "company management",
+                        "bill setup"
+                    ],
+                    "title": "Manage Countries",
+                    "route_name": "admin.utility.bill.company.countries",
+                    "menu_active": "admin.utility.bill.company.countries",
+                    "permission": [
+                        "manage bill company"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "Utility Bill Setting",
+                        "bill setting",
+                        "company setting",
+                        "utility company setting",
+                        "electricity bill",
+                        "internet bill",
+                        "telephone bill",
+                        "configure bills",
+                        "company add",
+                        "company management",
+                        "bill setup"
+                    ],
+                    "title": "Manage Categories",
+                    "route_name": "admin.bill.category.all",
+                    "menu_active": "admin.bill.category.*",
+                    "permission": [
+                        "manage bill category"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "utility bill",
+                        "utility bill setting",
+                        "utility bill charge setting",
+                        "utility bill configuration"
+                    ],
+                    "title": "Charge Setting",
+                    "route_name": "admin.utility.bill.charge.setting",
+                    "menu_active": "admin.utility.bill.charge.setting",
+                    "permission": [
+                        "manage utility bill charge"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Manage Gift Cards",
+            "icon": "las la-gift",
+            "menu_active": [
+                "admin.gift.card.*"
+            ],
+            "permission": [
+                "manage gift card category",
+                "manage gift card",
+                "view gift card purchases"
+            ],
+            "submenu": [
+                {
+                    "keyword": [
+                        "gaming gift cards",
+                        "entertainment gift cards",
+                        "shopping gift cards",
+                        "food and beverage gift cards",
+                        "travel gift cards",
+                        "streaming service gift cards",
+                        "music gift cards",
+                        "movie gift cards",
+                        "electronics store gift cards",
+                        "fashion gift cards",
+                        "health and beauty gift cards",
+                        "sports gift cards",
+                        "bookstore gift cards",
+                        "mobile top-up cards",
+                        "utility bill gift cards",
+                        "restaurant gift cards",
+                        "supermarket gift cards",
+                        "online store gift cards",
+                        "subscription gift cards",
+                        "digital content gift cards"
+                    ],
+                    "title": "Manage Countries",
+                    "route_name": "admin.gift.card.countries",
+                    "menu_active": "admin.gift.card.countries",
+                    "permission": [
+                        "manage gift card category"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "gaming gift cards",
+                        "entertainment gift cards",
+                        "shopping gift cards",
+                        "food and beverage gift cards",
+                        "travel gift cards",
+                        "streaming service gift cards",
+                        "music gift cards",
+                        "movie gift cards",
+                        "electronics store gift cards",
+                        "fashion gift cards",
+                        "health and beauty gift cards",
+                        "sports gift cards",
+                        "bookstore gift cards",
+                        "mobile top-up cards",
+                        "utility bill gift cards",
+                        "restaurant gift cards",
+                        "supermarket gift cards",
+                        "online store gift cards",
+                        "subscription gift cards",
+                        "digital content gift cards"
+                    ],
+                    "title": "Manage Categories",
+                    "route_name": "admin.gift.card.category.all",
+                    "menu_active": "admin.gift.card.category.all",
+                    "permission": [
+                        "manage gift card category"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "Gift Card History",
+                        "All Gift Card Purchases",
+                        "Gift card purchase History"
+                    ],
+                    "title": "Purchase History",
+                    "route_name": "admin.gift.card.history",
+                    "menu_active": "admin.gift.card.history",
+                    "permission": [
+                        "view gift card purchases"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Manage Virtual Card",
+            "icon": "la la-credit-card",
+            "menu_active": [
+                "admin.virtual.card.*"
+            ],
+            "permission": [
+                "view virtual card",
+                "configure virtual card provider",
+                "manage virtual card charge"
+            ],
+            "submenu": [
+                {
+                    "keyword": [
+                        "virtual card",
+                        "virtual card provide"
+                    ],
+                    "title": "All Card",
+                    "route_name": "admin.virtual.card.list",
+                    "menu_active": "admin.virtual.card.list",
+                    "permission": [
+                        "view virtual card"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "Configuration",
+                        "virtual card provide"
+                    ],
+                    "title": "Provider Configuration",
+                    "route_name": "admin.virtual.card.provider.configuration",
+                    "menu_active": "admin.virtual.card.provider.configuration",
+                    "permission": [
+                        "configure virtual card provider"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "Charge",
+                        "virtual Charge"
+                    ],
+                    "title": "Charge & Other Setting",
+                    "route_name": "admin.virtual.card.charge.and.other.setting",
+                    "menu_active": "admin.virtual.card.charge.and.other.setting",
+                    "permission": [
+                        "manage virtual card charge"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Manage Payment",
+            "icon": "las la-money-bill-wave",
+            "menu_active": [
+                "admin.payment.history",
+                "admin.payment.charge.setting"
+            ],
+            "permission": [
+                "view payment",
+                "manage payment charge"
+            ],
+            "submenu": [
+                {
+                    "keyword": [
+                        "payment",
+                        "payment history",
+                        "payment log"
+                    ],
+                    "title": "History",
+                    "route_name": "admin.payment.history",
+                    "menu_active": "admin.payment.history",
+                    "permission": [
+                        "view payment"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "payment",
+                        "payment setting",
+                        "payment configuration"
+                    ],
+                    "title": "Charge Setting",
+                    "route_name": "admin.payment.charge.setting",
+                    "menu_active": "admin.payment.charge.setting",
+                    "permission": [
+                        "manage payment charge"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Bank Transfer",
+            "icon": "las la-university",
+            "menu_active": [
+                "admin.bank.transfer.*",
+                "admin.setting.bank.transfer.*",
+                "admin.bank.transfer.charge.setting"
+            ],
+            "permission": [
+                "view bank transfer",
+                "manage bank transfer bank",
+                "manage bank transfer charge",
+                "approve bank transfer",
+                "reject bank transfer"
+            ],
+            "counters": [
+                "pendingBankTransferCount"
+            ],
+            "submenu": [
+                {
+                    "keyword": [
+                        "pending bank transfer",
+                        "pending bank transfer history",
+                        "pending bank transfer log"
+                    ],
+                    "title": "Pending",
+                    "route_name": "admin.bank.transfer.pending",
+                    "menu_active": "admin.bank.transfer.pending",
+                    "counter": "pendingBankTransferCount",
+                    "permission": [
+                        "view bank transfer"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "approved bank transfer",
+                        "approved bank transfer history",
+                        "approved bank transfer log"
+                    ],
+                    "title": "Approved",
+                    "route_name": "admin.bank.transfer.approved",
+                    "menu_active": "admin.bank.transfer.approved",
+                    "permission": [
+                        "view bank transfer"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "rejected bank transfer",
+                        "rejected bank transfer history",
+                        "rejected bank transfer log"
+                    ],
+                    "title": "Rejected",
+                    "route_name": "admin.bank.transfer.rejected",
+                    "menu_active": "admin.bank.transfer.rejected",
+                    "permission": [
+                        "view bank transfer"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "all bank transfer",
+                        "all bank transfer history",
+                        "all bank transfer log"
+                    ],
+                    "title": "All",
+                    "route_name": "admin.bank.transfer.all",
+                    "menu_active": "admin.bank.transfer.all",
+                    "permission": [
+                        "view bank transfer"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "bank transfer",
+                        "bank transfer setting",
+                        "bank transfer configuration",
+                        "bank list",
+                        "bank management",
+                        "bank manage",
+                        "bank add"
+                    ],
+                    "title": "Manage Bank",
+                    "route_name": "admin.setting.bank.transfer.all",
+                    "menu_active": "admin.setting.bank.transfer.*",
+                    "permission": [
+                        "manage bank transfer bank"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "bank transfer",
+                        "bank transfer setting",
+                        "bank transfer charge setting",
+                        "bank transfer configuration"
+                    ],
+                    "title": "Charge Setting",
+                    "route_name": "admin.bank.transfer.charge.setting",
+                    "menu_active": "admin.bank.transfer.charge.setting",
+                    "permission": [
+                        "manage bank transfer charge"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Manage Microfinance",
+            "icon": "las la-piggy-bank",
+            "menu_active": [
+                "admin.microfinance.*",
+                "admin.setting.microfinance.*",
+                "admin.microfinance.charge.setting"
+            ],
+            "permission": [
+                "view microfinance",
+                "manage microfinance ngo",
+                "manage microfinance charge",
+                "approve microfinance",
+                "reject microfinance"
+            ],
+            "counters": [
+                "pendingMicrofinanceCount"
+            ],
+            "submenu": [
+                {
+                    "keyword": [
+                        "pending microfinance",
+                        "pending microfinance history",
+                        "pending microfinance log"
+                    ],
+                    "title": "Pending",
+                    "route_name": "admin.microfinance.pending",
+                    "menu_active": "admin.microfinance.pending",
+                    "permission": [
+                        "view microfinance"
+                    ],
+                    "counter": "pendingMicrofinanceCount"
+                },
+                {
+                    "keyword": [
+                        "approved microfinance",
+                        "approved microfinance history",
+                        "approved microfinance log"
+                    ],
+                    "title": "Approved",
+                    "route_name": "admin.microfinance.approved",
+                    "menu_active": "admin.microfinance.approved",
+                    "permission": [
+                        "view microfinance"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "rejected microfinance",
+                        "rejected microfinance history",
+                        "rejected microfinance log"
+                    ],
+                    "title": "Rejected",
+                    "route_name": "admin.microfinance.rejected",
+                    "menu_active": "admin.microfinance.rejected",
+                    "permission": [
+                        "view microfinance"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "all microfinance",
+                        "all microfinance history",
+                        "all microfinance log"
+                    ],
+                    "title": "All",
+                    "route_name": "admin.microfinance.all",
+                    "menu_active": "admin.microfinance.all",
+                    "permission": [
+                        "view microfinance"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "manage NGO",
+                        "NGO management",
+                        "NGO add",
+                        "microfinance"
+                    ],
+                    "title": "Manage NGO",
+                    "route_name": "admin.setting.microfinance.all",
+                    "menu_active": "admin.setting.microfinance.*",
+                    "permission": [
+                        "manage microfinance ngo"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "microfinance",
+                        "microfinance setting",
+                        "microfinance charge setting",
+                        "microfinance configuration",
+                        "ngo charge setting"
+                    ],
+                    "title": "Charge Setting",
+                    "route_name": "admin.microfinance.charge.setting",
+                    "menu_active": "admin.microfinance.charge.setting",
+                    "permission": [
+                        "manage microfinance charge"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Education Fee",
+            "icon": "las la-school",
+            "menu_active": [
+                "admin.education.fee.*",
+                "admin.education.institute.*",
+                "admin.education.category.*"
+            ],
+            "counters": [
+                "pendingEducationFeeCount"
+            ],
+            "permission": [
+                "view education fee",
+                "manage education fee charge",
+                "manage institution",
+                "manage institution category",
+                "approve education fee",
+                "reject education fee"
+            ],
+            "submenu": [
+                {
+                    "keyword": [
+                        "pending education fee",
+                        "pending education fee history",
+                        "pending education fee log"
+                    ],
+                    "title": "Pending",
+                    "route_name": "admin.education.fee.pending",
+                    "menu_active": "admin.education.fee.pending",
+                    "counter": "pendingEducationFeeCount",
+                    "permission": [
+                        "view education fee"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "approved education fee",
+                        "approved education fee history",
+                        "approved education fee log"
+                    ],
+                    "title": "Approved",
+                    "route_name": "admin.education.fee.approved",
+                    "menu_active": "admin.education.fee.approved",
+                    "permission": [
+                        "view education fee"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "rejected education fee",
+                        "rejected education fee history",
+                        "rejected education fee log"
+                    ],
+                    "title": "Rejected",
+                    "route_name": "admin.education.fee.rejected",
+                    "menu_active": "admin.education.fee.rejected",
+                    "permission": [
+                        "view education fee"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "all education fee",
+                        "all education fee history",
+                        "all education fee log"
+                    ],
+                    "title": "All",
+                    "route_name": "admin.education.fee.all",
+                    "menu_active": "admin.education.fee.all",
+                    "permission": [
+                        "view education fee"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "institution Setting",
+                        "institution add",
+                        "institution management",
+                        "education management",
+                        "manage institution"
+                    ],
+                    "title": "Manage Institution",
+                    "route_name": "admin.education.institute.all",
+                    "menu_active": "admin.education.institute.*",
+                    "permission": [
+                        "manage institution"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "category setting",
+                        "education category",
+                        "education category management"
+                    ],
+                    "title": "Institution Category",
+                    "route_name": "admin.education.category.all",
+                    "menu_active": "admin.education.category.all",
+                    "permission": [
+                        "manage institution category"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "education fee",
+                        "education fee setting",
+                        "education fee charge setting",
+                        "education fee configuration"
+                    ],
+                    "title": "Charge Setting",
+                    "route_name": "admin.education.fee.charge.setting",
+                    "menu_active": "admin.education.fee.charge.setting",
+                    "permission": [
+                        "manage education fee charge"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Manage Donation",
+            "icon": "las la-donate",
+            "menu_active": [
+                "admin.donation.all",
+                "admin.donation.charity.*"
+            ],
+            "permission": [
+                "view donation",
+                "manage charity"
+            ],
+            "submenu": [
+                {
+                    "keyword": [
+                        "donation",
+                        "donation history",
+                        "donation log"
+                    ],
+                    "title": "History",
+                    "route_name": "admin.donation.all",
+                    "menu_active": "admin.donation.all",
+                    "permission": [
+                        "view donation"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "charity",
+                        "donation charity",
+                        "manage donation charity",
+                        "donation foundation"
+                    ],
+                    "title": "Manage Charity",
+                    "route_name": "admin.donation.charity.all",
+                    "menu_active": "admin.donation.charity.*",
+                    "permission": [
+                        "manage charity"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Request Money",
+            "icon": "las la-money-bill-wave-alt",
+            "route_name": "admin.request.money.history",
+            "menu_active": "admin.request.money.*",
+            "permission": [
+                "view money requests"
+            ],
+            "keyword": [
+                "Request Money",
+                "Request Money History",
+                "Money"
+            ]
+        }
+    ],
+    "people": [
+        {
+            "title": "Manage Users",
+            "icon": "las la-user-friends",
+            "counters": [
+                "bannedUsersCount",
+                "emailUnverifiedUsersCount",
+                "mobileUnverifiedUsersCount",
+                "kycUnverifiedUsersCount",
+                "kycPendingUsersCount"
+            ],
+            "menu_active": "admin.users*",
+            "permission": [
+                "view users",
+                "send user notification",
+                "view user notifications",
+                "add user balance",
+                "deduct user balance",
+                "ban user",
+                "login as user",
+                "update user"
+            ],
+            "submenu": [
+                {
+                    "keyword": [
+                        "active users",
+                        "Manage Users",
+                        "User management",
+                        "User control",
+                        "User status",
+                        "User activity",
+                        "User analytics"
+                    ],
+                    "title": "Active Users",
+                    "route_name": "admin.users.active",
+                    "menu_active": "admin.users.active",
+                    "permission": [
+                        "view users"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "email unverified users",
+                        "Manage Users",
+                        "User verification",
+                        "User authentication",
+                        "User management"
+                    ],
+                    "title": "Email Unverified",
+                    "route_name": "admin.users.email.unverified",
+                    "menu_active": "admin.users.email.unverified",
+                    "counter": "emailUnverifiedUsersCount",
+                    "permission": [
+                        "view users"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "mobile unverified users",
+                        "Manage Users",
+                        "User verification",
+                        "User authentication",
+                        "User management"
+                    ],
+                    "title": "Mobile Unverified",
+                    "route_name": "admin.users.mobile.unverified",
+                    "menu_active": "admin.users.mobile.unverified",
+                    "counter": "mobileUnverifiedUsersCount",
+                    "permission": [
+                        "view users"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "kyc unverified users",
+                        "Manage Users",
+                        "User verification",
+                        "User authentication",
+                        "User management"
+                    ],
+                    "title": "KYC Unverified",
+                    "route_name": "admin.users.kyc.unverified",
+                    "menu_active": "admin.users.kyc.unverified",
+                    "counter": "kycUnverifiedUsersCount",
+                    "permission": [
+                        "view users"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "kyc pending users",
+                        "Manage Users",
+                        "User verification",
+                        "User authentication",
+                        "User management"
+                    ],
+                    "title": "KYC Pending",
+                    "route_name": "admin.users.kyc.pending",
+                    "menu_active": "admin.users.kyc.pending",
+                    "counter": "kycPendingUsersCount",
+                    "permission": [
+                        "view users"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "with balance users",
+                        "Manage Users",
+                        "User management",
+                        "User activity",
+                        "Account management"
+                    ],
+                    "title": "With Balance",
+                    "route_name": "admin.users.with.balance",
+                    "menu_active": "admin.users.with.balance",
+                    "permission": [
+                        "view users"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "banned users",
+                        "Manage Users",
+                        "User management",
+                        "Account bans",
+                        "User activity"
+                    ],
+                    "title": "Banned Users",
+                    "route_name": "admin.users.banned",
+                    "menu_active": "admin.users.banned",
+                    "counter": "bannedUsersCount",
+                    "permission": [
+                        "view users"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "delete users",
+                        "Manage Users",
+                        "User management",
+                        "Account delete"
+                    ],
+                    "title": "Account Deleted Users",
+                    "route_name": "admin.users.deleted",
+                    "menu_active": "admin.users.deleted",
+                    "counter": "deletedUsersCount",
+                    "permission": [
+                        "view users"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "all users users",
+                        "Manage Users",
+                        "User management",
+                        "User control",
+                        "User activity",
+                        "User analytics"
+                    ],
+                    "title": "All Users",
+                    "route_name": "admin.users.all",
+                    "menu_active": "admin.users.all",
+                    "permission": [
+                        "view users"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "send notification users",
+                        "Manage Users",
+                        "User notifications",
+                        "User management",
+                        "User activity"
+                    ],
+                    "title": "Send Notification",
+                    "route_name": "admin.users.notification.all",
+                    "menu_active": "admin.users.notification.all",
+                    "permission": [
+                        "send user notification"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Manage Agents",
+            "icon": "las la-user-secret",
+            "counters": [
+                "bannedAgentsCount",
+                "emailUnverifiedAgentsCount",
+                "mobileUnverifiedAgentsCount",
+                "kycUnverifiedAgentsCount",
+                "kycPendingAgentsCount"
+            ],
+            "menu_active": "admin.agents*",
+            "permission": [
+                "view agents",
+                "send agent notification",
+                "view agent notifications",
+                "add agent balance",
+                "deduct agent balance",
+                "ban agent",
+                "login as agent",
+                "update agent",
+                "verify agent kyc"
+            ],
+            "submenu": [
+                {
+                    "keyword": [
+                        "active agents",
+                        "Manage Agents",
+                        "Agent management",
+                        "Agent control",
+                        "Agent status",
+                        "Agent activity",
+                        "Agent analytics"
+                    ],
+                    "title": "Active Agents",
+                    "route_name": "admin.agents.active",
+                    "menu_active": "admin.agents.active",
+                    "permission": [
+                        "view agents"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "email unverified agents",
+                        "Manage Agents",
+                        "Agent verification",
+                        "Agent authentication",
+                        "Agent management"
+                    ],
+                    "title": "Email Unverified",
+                    "route_name": "admin.agents.email.unverified",
+                    "menu_active": "admin.agents.email.unverified",
+                    "counter": "emailUnverifiedAgentsCount",
+                    "permission": [
+                        "view agents"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "mobile unverified agents",
+                        "Manage Agents",
+                        "Agent verification",
+                        "Agent authentication",
+                        "Agent management"
+                    ],
+                    "title": "Mobile Unverified",
+                    "route_name": "admin.agents.mobile.unverified",
+                    "menu_active": "admin.agents.mobile.unverified",
+                    "counter": "mobileUnverifiedAgentsCount",
+                    "permission": [
+                        "view agents"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "kyc unverified agents",
+                        "Manage Agents",
+                        "Agent verification",
+                        "Agent authentication",
+                        "Agent management"
+                    ],
+                    "title": "KYC Unverified",
+                    "route_name": "admin.agents.kyc.unverified",
+                    "menu_active": "admin.agents.kyc.unverified",
+                    "counter": "kycUnverifiedAgentsCount",
+                    "permission": [
+                        "view agents"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "kyc pending agents",
+                        "Manage Agents",
+                        "Agent verification",
+                        "Agent authentication",
+                        "Agent management"
+                    ],
+                    "title": "KYC Pending",
+                    "route_name": "admin.agents.kyc.pending",
+                    "menu_active": "admin.agents.kyc.pending",
+                    "counter": "kycPendingAgentsCount",
+                    "permission": [
+                        "view agents"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "with balance agents",
+                        "Manage Agents",
+                        "Agent management",
+                        "Agent activity",
+                        "Account management"
+                    ],
+                    "title": "With Balance",
+                    "route_name": "admin.agents.with.balance",
+                    "menu_active": "admin.agents.with.balance",
+                    "permission": [
+                        "view agents"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "banned agents",
+                        "Manage Agents",
+                        "Agent management",
+                        "Account bans",
+                        "Agent activity"
+                    ],
+                    "title": "Banned Agents",
+                    "route_name": "admin.agents.banned",
+                    "menu_active": "admin.agents.banned",
+                    "counter": "bannedAgentsCount",
+                    "permission": [
+                        "view agents"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "deleted agents",
+                        "Manage Agents",
+                        "Agent management",
+                        "Account delete"
+                    ],
+                    "title": "Deleted Agents",
+                    "route_name": "admin.agents.deleted",
+                    "menu_active": "admin.agents.deleted",
+                    "counter": "deletedAgentsCount",
+                    "permission": [
+                        "view agents"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "all agents",
+                        "Manage Agents",
+                        "Agent management",
+                        "Agent control",
+                        "Agent activity",
+                        "Agent analytics"
+                    ],
+                    "title": "All Agents",
+                    "route_name": "admin.agents.all",
+                    "menu_active": "admin.agents.all",
+                    "permission": [
+                        "view agents"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "send notification agents",
+                        "Manage Agents",
+                        "Agent notifications",
+                        "Agent management",
+                        "Agent activity"
+                    ],
+                    "title": "Send Notification",
+                    "route_name": "admin.agents.notification.all",
+                    "menu_active": "admin.agents.notification.all",
+                    "permission": [
+                        "send agent notification"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Manage Merchants",
+            "icon": "las la-user-tie",
+            "counters": [
+                "bannedMerchantsCount",
+                "emailUnverifiedMerchantsCount",
+                "mobileUnverifiedMerchantsCount",
+                "kycUnverifiedMerchantsCount",
+                "kycPendingMerchantsCount"
+            ],
+            "menu_active": "admin.merchants*",
+            "permission": [
+                "view merchants",
+                "send merchant notification",
+                "view merchant notifications",
+                "add merchant balance",
+                "deduct merchant balance",
+                "ban merchant",
+                "login as merchant",
+                "update merchant",
+                "verify merchant kyc"
+            ],
+            "submenu": [
+                {
+                    "keyword": [
+                        "active merchants",
+                        "Manage Merchants",
+                        "Merchant management",
+                        "Merchant control",
+                        "Merchant status",
+                        "Merchant activity",
+                        "Merchant analytics"
+                    ],
+                    "title": "Active Merchants",
+                    "route_name": "admin.merchants.active",
+                    "menu_active": "admin.merchants.active",
+                    "permission": [
+                        "view merchants"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "email unverified merchants",
+                        "Manage Merchants",
+                        "Merchant verification",
+                        "Merchant authentication",
+                        "Merchant management"
+                    ],
+                    "title": "Email Unverified",
+                    "route_name": "admin.merchants.email.unverified",
+                    "menu_active": "admin.merchants.email.unverified",
+                    "counter": "emailUnverifiedMerchantsCount",
+                    "permission": [
+                        "view merchants"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "mobile unverified merchants",
+                        "Manage Merchants",
+                        "Merchant verification",
+                        "Merchant authentication",
+                        "Merchant management"
+                    ],
+                    "title": "Mobile Unverified",
+                    "route_name": "admin.merchants.mobile.unverified",
+                    "menu_active": "admin.merchants.mobile.unverified",
+                    "counter": "mobileUnverifiedMerchantsCount",
+                    "permission": [
+                        "view merchants"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "kyc unverified merchants",
+                        "Manage Merchants",
+                        "Merchant verification",
+                        "Merchant authentication",
+                        "Merchant management"
+                    ],
+                    "title": "KYC Unverified",
+                    "route_name": "admin.merchants.kyc.unverified",
+                    "menu_active": "admin.merchants.kyc.unverified",
+                    "counter": "kycUnverifiedMerchantsCount",
+                    "permission": [
+                        "view merchants"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "kyc pending merchants",
+                        "Manage Merchants",
+                        "Merchant verification",
+                        "Merchant authentication",
+                        "Merchant management"
+                    ],
+                    "title": "KYC Pending",
+                    "route_name": "admin.merchants.kyc.pending",
+                    "menu_active": "admin.merchants.kyc.pending",
+                    "counter": "kycPendingMerchantsCount",
+                    "permission": [
+                        "view merchants"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "with balance merchants",
+                        "Manage Merchants",
+                        "Merchant management",
+                        "Merchant activity",
+                        "Account management"
+                    ],
+                    "title": "With Balance",
+                    "route_name": "admin.merchants.with.balance",
+                    "menu_active": "admin.merchants.with.balance",
+                    "permission": [
+                        "view merchants"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "banned merchants",
+                        "Manage Merchants",
+                        "Merchant management",
+                        "Account bans",
+                        "Merchant activity"
+                    ],
+                    "title": "Banned Merchants",
+                    "route_name": "admin.merchants.banned",
+                    "menu_active": "admin.merchants.banned",
+                    "counter": "bannedMerchantsCount",
+                    "permission": [
+                        "view merchants"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "deleted merchants",
+                        "Manage Merchants",
+                        "Merchant management",
+                        "Account deleted"
+                    ],
+                    "title": "Deleted Merchants",
+                    "route_name": "admin.merchants.deleted",
+                    "menu_active": "admin.merchants.deleted",
+                    "counter": "deletedAgentsCount",
+                    "permission": [
+                        "view merchants"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "all merchants",
+                        "Manage Merchants",
+                        "Merchant management",
+                        "Merchant control",
+                        "Merchant activity",
+                        "Merchant analytics"
+                    ],
+                    "title": "All Merchants",
+                    "route_name": "admin.merchants.all",
+                    "menu_active": "admin.merchants.all",
+                    "permission": [
+                        "view merchants"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "send notification merchants",
+                        "Manage Merchants",
+                        "Merchant notifications",
+                        "Merchant management",
+                        "Merchant activity"
+                    ],
+                    "title": "Send Notification",
+                    "route_name": "admin.merchants.notification.all",
+                    "menu_active": "admin.merchants.notification.all",
+                    "permission": [
+                        "send merchant notification"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Manage Admin",
+            "icon": "la la-user-circle",
+            "menu_active": [
+                "admin.list",
+                "admin.role.*"
+            ],
+            "permission": [
+                "view admin",
+                "add admin",
+                "edit admin",
+                "view roles",
+                "add role",
+                "edit role",
+                "assign permissions"
+            ],
+            "submenu": [
+                {
+                    "title": "Manage Admin",
+                    "icon": "la la-user-circle",
+                    "menu_active": "admin.list",
+                    "route_name": "admin.list",
+                    "permission": [
+                        "view admin",
+                        "add admin",
+                        "edit admin"
+                    ],
+                    "keyword": [
+                        "admin",
+                        "system admin",
+                        "platform admin",
+                        "operator"
+                    ]
+                },
+                {
+                    "title": "Role & Permissions",
+                    "icon": "las la-user-tag",
+                    "menu_active": "admin.role.*",
+                    "route_name": "admin.role.list",
+                    "permission": [
+                        "view roles",
+                        "add role",
+                        "edit role",
+                        "assign permissions"
+                    ],
+                    "keyword": [
+                        "role",
+                        "permission"
+                    ]
+                }
+            ]
+        }
+    ],
+    "finance": [
+        {
+            "title": "User Add Money",
+            "icon": "las la-plus-circle",
+            "counters": [
+                "pendingDepositsCount"
+            ],
+            "menu_active": "admin.deposit*",
+            "permission": [
+                "view user add money",
+                "approve user add money",
+                "reject user add money"
+            ],
+            "submenu": [
+                {
+                    "keyword": [
+                        "Pending Add Money",
+                        "Deposits",
+                        "User Add Money",
+                        "User Add Money management",
+                        "User Add Money control",
+                        "User Add Money status",
+                        "User Add Money activity"
+                    ],
+                    "title": "Pending Add Money",
+                    "route_name": "admin.deposit.pending",
+                    "menu_active": "admin.deposit.pending",
+                    "counter": "pendingDepositsCount",
+                    "permission": [
+                        "view user add money"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "Approved Add Money",
+                        "User Add Money",
+                        "Deposits",
+                        "User Add Money management",
+                        "User Add Money activity"
+                    ],
+                    "title": "Approved Add Money",
+                    "route_name": "admin.deposit.approved",
+                    "menu_active": "admin.deposit.approved",
+                    "permission": [
+                        "view user add money"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "Successful Add Money",
+                        "User Add Money",
+                        "Deposits",
+                        "User Add Money management",
+                        "User Add Money activity"
+                    ],
+                    "title": "Successful Add Money",
+                    "route_name": "admin.deposit.successful",
+                    "menu_active": "admin.deposit.successful",
+                    "permission": [
+                        "view user add money"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "Rejected User Add Money",
+                        "Deposits",
+                        "User Add Money",
+                        "User Add Money management",
+                        "User Add Money activity"
+                    ],
+                    "title": "Rejected Add Money",
+                    "route_name": "admin.deposit.rejected",
+                    "menu_active": "admin.deposit.rejected",
+                    "permission": [
+                        "view user add money"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "Initiated User Add Money",
+                        "Deposits",
+                        "User Add Money",
+                        "User Add Money management",
+                        "User Add Money activity"
+                    ],
+                    "title": "Initiated Add Money",
+                    "route_name": "admin.deposit.initiated",
+                    "menu_active": "admin.deposit.initiated",
+                    "permission": [
+                        "view user add money"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "All User Add Money",
+                        "Deposits",
+                        "User Add Money",
+                        "User Add Money management",
+                        "User Add Money control",
+                        "User Add Money activity"
+                    ],
+                    "title": "All Add Money",
+                    "route_name": "admin.deposit.list",
+                    "menu_active": "admin.deposit.list",
+                    "permission": [
+                        "view user add money"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Agent Add Money",
+            "icon": "las la-plus-circle",
+            "counters": [
+                "pendingAgentDepositsCount"
+            ],
+            "menu_active": "admin.agent.deposit.*",
+            "permission": [
+                "view agent add money",
+                "approve agent add money",
+                "reject agent add money"
+            ],
+            "submenu": [
+                {
+                    "keyword": [
+                        "Pending Agent Add Money",
+                        "Deposits",
+                        "Agent Add Money",
+                        "Agent Add Money management",
+                        "Agent Add Money control",
+                        "Agent Add Money status",
+                        "Agent Add Money activity"
+                    ],
+                    "title": "Pending Add Money",
+                    "route_name": "admin.agent.deposit.pending",
+                    "menu_active": "admin.agent.deposit.pending",
+                    "counter": "pendingAgentDepositsCount",
+                    "permission": [
+                        "view agent add money"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "Approved Add Money",
+                        "Agent Add Money",
+                        "Deposits",
+                        "Agent Add Money management",
+                        "Agent Add Money activity"
+                    ],
+                    "title": "Approved Add Money",
+                    "route_name": "admin.agent.deposit.approved",
+                    "menu_active": "admin.agent.deposit.approved",
+                    "permission": [
+                        "view agent add money"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "Successful Agent Add Money",
+                        "Agent Add Money",
+                        "Deposits",
+                        "Agent Add Money management",
+                        "Agent Add Money activity"
+                    ],
+                    "title": "Successful Add Money",
+                    "route_name": "admin.agent.deposit.successful",
+                    "menu_active": "admin.agent.deposit.successful",
+                    "permission": [
+                        "view agent add money"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "Rejected Add Money",
+                        "Deposits",
+                        "Agent Add Money",
+                        "Agent Add Money management",
+                        "Agent Add Money activity"
+                    ],
+                    "title": "Rejected Add Money",
+                    "route_name": "admin.agent.deposit.rejected",
+                    "menu_active": "admin.agent.deposit.rejected",
+                    "permission": [
+                        "view agent add money"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "Initiated Add Money",
+                        "Deposits",
+                        "Agent Add Money",
+                        "Agent Add Money management",
+                        "Agent Add Money activity"
+                    ],
+                    "title": "Initiated Add Money",
+                    "route_name": "admin.agent.deposit.initiated",
+                    "menu_active": "admin.agent.deposit.initiated",
+                    "permission": [
+                        "view agent add money"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "All Agent Add Money",
+                        "Deposits",
+                        "Agent Add Money",
+                        "Agent Add Money management",
+                        "Agent Add Money control",
+                        "Agent Add Money activity"
+                    ],
+                    "title": "All Add Money",
+                    "route_name": "admin.agent.deposit.list",
+                    "menu_active": "admin.agent.deposit.list",
+                    "permission": [
+                        "view agent add money"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Agent Withdrawals",
+            "icon": "las la-money-check",
+            "counters": [
+                "pendingWithdrawCount"
+            ],
+            "menu_active": "admin.withdraw.data*",
+            "permission": [
+                "view agent withdraw",
+                "approve agent withdraw",
+                "reject agent withdraw"
+            ],
+            "submenu": [
+                {
+                    "keyword": [
+                        "Pending Agent Withdrawals",
+                        "Agent Withdrawals",
+                        "Withdrawal management",
+                        "Withdrawal control",
+                        "Withdrawal status",
+                        "Withdrawal activity"
+                    ],
+                    "title": "Pending Withdrawals",
+                    "route_name": "admin.withdraw.data.pending",
+                    "menu_active": "admin.withdraw.data.pending",
+                    "counter": "pendingWithdrawCount",
+                    "permission": [
+                        "view agent withdraw"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "Approved Withdrawals",
+                        "Agent Withdrawals",
+                        "Withdrawal management",
+                        "Withdrawal activity"
+                    ],
+                    "title": "Approved Withdrawals",
+                    "route_name": "admin.withdraw.data.approved",
+                    "menu_active": "admin.withdraw.data.approved",
+                    "permission": [
+                        "view agent withdraw"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "Rejected Withdrawals",
+                        "Agent Withdrawals",
+                        "Withdrawal management",
+                        "Withdrawal activity"
+                    ],
+                    "title": "Rejected Withdrawals",
+                    "route_name": "admin.withdraw.data.rejected",
+                    "menu_active": "admin.withdraw.data.rejected",
+                    "permission": [
+                        "view agent withdraw"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "All Agent Withdrawals",
+                        "Agent Withdrawals",
+                        "Withdrawal management",
+                        "Withdrawal control",
+                        "Withdrawal activity"
+                    ],
+                    "title": "All  Withdrawals",
+                    "route_name": "admin.withdraw.data.all",
+                    "menu_active": "admin.withdraw.data.all",
+                    "permission": [
+                        "view agent withdraw"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Merchant Withdrawals",
+            "icon": "las la-money-check",
+            "counters": [
+                "pendingMerchantWithdrawCount"
+            ],
+            "menu_active": "admin.withdraw.merchant.data*",
+            "permission": [
+                "view merchant withdraw",
+                "approve merchant withdraw",
+                "reject merchant withdraw"
+            ],
+            "submenu": [
+                {
+                    "keyword": [
+                        "Pending Merchant Withdrawals",
+                        "Merchant Withdrawals",
+                        "Withdrawal management",
+                        "Withdrawal control",
+                        "Withdrawal status",
+                        "Withdrawal activity"
+                    ],
+                    "title": "Pending Withdrawals",
+                    "route_name": "admin.withdraw.merchant.data.pending",
+                    "menu_active": "admin.withdraw.merchant.data.pending",
+                    "counter": "pendingMerchantWithdrawCount",
+                    "permission": [
+                        "view merchant withdraw"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "Approved Merchant Withdrawals",
+                        "Merchant Withdrawals",
+                        "Withdrawal management",
+                        "Withdrawal activity"
+                    ],
+                    "title": "Approved Withdrawals",
+                    "route_name": "admin.withdraw.merchant.data.approved",
+                    "menu_active": "admin.withdraw.merchant.data.approved",
+                    "permission": [
+                        "view merchant withdraw"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "Rejected Merchant Withdrawals",
+                        "Merchant Withdrawals",
+                        "Withdrawal management",
+                        "Withdrawal activity"
+                    ],
+                    "title": "Rejected Withdrawals",
+                    "route_name": "admin.withdraw.merchant.data.rejected",
+                    "menu_active": "admin.withdraw.merchant.data.rejected",
+                    "permission": [
+                        "view merchant withdraw"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "All Merchant Withdrawals",
+                        "Merchant Withdrawals",
+                        "Withdrawal management",
+                        "Withdrawal control",
+                        "Withdrawal activity"
+                    ],
+                    "title": "All  Withdrawals",
+                    "route_name": "admin.withdraw.merchant.data.all",
+                    "menu_active": "admin.withdraw.merchant.data.all",
+                    "permission": [
+                        "view merchant withdraw"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Gateways",
+            "icon": "las la-credit-card",
+            "menu_active": [
+                "admin.gateway.*",
+                "admin.withdraw.method.*"
+            ],
+            "permission": [
+                "manage gateways",
+                "manage withdraw methods"
+            ],
+            "submenu": [
+                {
+                    "title": "Payment Gateway",
+                    "route_name": "admin.gateway.automatic.index",
+                    "menu_active": "admin.gateway.*",
+                    "keyword": [
+                        "gateway",
+                        "payment gateway",
+                        "automatic payment gateway",
+                        "gateway",
+                        "automatic",
+                        "configure payment gateways",
+                        "aamarpay",
+                        "amarpay",
+                        "authorize",
+                        "autorize.net",
+                        "btcpay",
+                        "btc pay",
+                        "binance",
+                        "blockchain",
+                        "cashmaal",
+                        "checkout",
+                        "coinbase commerce",
+                        "coingate",
+                        "coinpayments",
+                        "flutterwave",
+                        "instamojo",
+                        "mercado pago",
+                        "mollie",
+                        "nmi",
+                        "now payments",
+                        "nowpayments",
+                        "payeer",
+                        "paypal",
+                        "paystack",
+                        "paytm",
+                        "perfect money",
+                        "perfectmoney",
+                        "razorpay",
+                        "skrill",
+                        "sslcommerz",
+                        "stripe",
+                        "twocheckout",
+                        "two checkout",
+                        "2checkout",
+                        "manual payment gateway",
+                        "bank transfer",
+                        "mobile money transfer"
+                    ],
+                    "permission": [
+                        "manage gateways"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "manual withdrawal",
+                        "payout",
+                        "payment withdrawal",
+                        "withdrawal options",
+                        "withdrawal settings",
+                        "payout methods",
+                        "payout settings",
+                        "configure withdrawals",
+                        "configure payouts"
+                    ],
+                    "title": "Withdrawals Methods",
+                    "icon": "la la-wallet",
+                    "route_name": "admin.withdraw.method.index",
+                    "permission": [
+                        "manage withdraw methods"
+                    ]
+                }
+            ]
+        }
+    ],
+    "utilities & report": [
+        {
+            "title": "Manage Extension",
+            "icon": "las la-puzzle-piece",
+            "route_name": "admin.extensions.index",
+            "menu_active": "admin.extensions.index",
+            "permission": [
+                "manage extensions"
+            ],
+            "keyword": [
+                "extensions",
+                "plugins",
+                "addons",
+                "extension settings",
+                "plugin settings",
+                "addon settings",
+                "captcha",
+                "custom captcha",
+                "google captcha",
+                "recaptcha",
+                "re-captcha",
+                "re captcha",
+                "tawk",
+                "tawk.to",
+                "tawk to",
+                "analytics",
+                "google analytics",
+                "facebook comment"
+            ]
+        },
+        {
+            "title": "Manage SEO",
+            "icon": "las la-chart-line",
+            "route_name": "admin.seo",
+            "menu_active": "admin.seo",
+            "permission": [
+                "seo settings"
+            ],
+            "keyword": [
+                "SEO management",
+                "search engine optimization",
+                "SEO analysis",
+                "keyword research",
+                "meta tags",
+                "site audit",
+                "backlink management",
+                "content optimization",
+                "SEO strategy",
+                "traffic analysis",
+                "on-page SEO",
+                "off-page SEO",
+                "ranking reports"
+            ]
+        },
+        {
+            "title": "Manage Language",
+            "icon": "las la-language",
+            "route_name": "admin.language.manage",
+            "menu_active": "admin.language.*",
+            "permission": [
+                "manage languages"
+            ],
+            "keyword": [
+                "language",
+                "localize",
+                "translation",
+                "translate",
+                "internationalization",
+                "language settings",
+                "localization settings",
+                "translation settings",
+                "configure languages",
+                "configure localization"
+            ]
+        },
+        {
+            "title": "Report",
+            "icon": "las la-table",
+            "menu_active": "admin.report.*",
+            "permission": [
+                "view all transactions",
+                "view user transactions",
+                "view agent transactions",
+                "view merchant transactions",
+                "view login history",
+                "view all notifications",
+                "view user notifications",
+                "view agent notifications",
+                "view merchant notifications"
+            ],
+            "submenu": [
+                {
+                    "title": "User Transaction",
+                    "icon": "las la-dot-circle",
+                    "route_name": "admin.report.user.transaction",
+                    "menu_active": "admin.report.user.transaction",
+                    "permission": [
+                        "view user transactions"
+                    ],
+                    "keyword": [
+                        "User Transaction Log",
+                        "Report",
+                        "User Transaction report",
+                        "User Transaction history",
+                        "User Transaction activity",
+                        "balance sheet",
+                        "balance log",
+                        "balance history"
+                    ]
+                },
+                {
+                    "title": "Agent Transaction",
+                    "icon": "las la-dot-circle",
+                    "route_name": "admin.report.agent.transaction",
+                    "menu_active": "admin.report.agent.transaction",
+                    "permission": [
+                        "view agent transactions"
+                    ],
+                    "keyword": [
+                        "Agent Transaction Log",
+                        "Report",
+                        "Agent Transaction report",
+                        "Agent Transaction history",
+                        "Agent Transaction activity",
+                        "balance sheet",
+                        "balance log",
+                        "balance history"
+                    ]
+                },
+                {
+                    "title": "Merchant Transaction",
+                    "icon": "las la-dot-circle",
+                    "route_name": "admin.report.merchant.transaction",
+                    "menu_active": "admin.report.merchant.transaction",
+                    "permission": [
+                        "view merchant transactions"
+                    ],
+                    "keyword": [
+                        "Merchant Transaction Log",
+                        "Report",
+                        "Merchant Transaction report",
+                        "Merchant Transaction history",
+                        "Merchant Transaction activity",
+                        "balance sheet",
+                        "balance log",
+                        "balance history"
+                    ]
+                },
+                {
+                    "title": "All Transaction",
+                    "icon": "las la-dot-circle",
+                    "route_name": "admin.report.transaction",
+                    "menu_active": "admin.report.transaction",
+                    "permission": [
+                        "view all transactions"
+                    ],
+                    "keyword": [
+                        "All Transaction Log",
+                        "All Report",
+                        "All Transaction report",
+                        "All Transaction history",
+                        "All Transaction activity",
+                        "balance sheet",
+                        "balance log",
+                        "balance history"
+                    ]
+                },
+                {
+                    "title": "Login History",
+                    "icon": "las la-dot-circle",
+                    "route_name": "admin.report.login.history",
+                    "menu_active": "admin.report.login.history",
+                    "permission": [
+                        "view login history"
+                    ],
+                    "keyword": [
+                        "Login History",
+                        "Report",
+                        "Login report",
+                        "Login history",
+                        "Login activity"
+                    ]
+                },
+                {
+                    "title": "User Notification",
+                    "icon": "las la-dot-circle",
+                    "route_name": "admin.report.user.notification.history",
+                    "menu_active": "admin.report.user.notification.history",
+                    "permission": [
+                        "view user notifications"
+                    ],
+                    "keyword": [
+                        "User Notification History",
+                        "Report",
+                        "User Notification report",
+                        "User Notification history",
+                        "User Notification activity",
+                        "email log",
+                        "email history",
+                        "sms log",
+                        "sms history",
+                        "push notification user log",
+                        "push notification user history"
+                    ]
+                },
+                {
+                    "title": "Agent Notification",
+                    "icon": "las la-dot-circle",
+                    "route_name": "admin.report.agent.notification.history",
+                    "menu_active": "admin.report.agent.notification.history",
+                    "permission": [
+                        "view agent notifications"
+                    ],
+                    "keyword": [
+                        "Agent Notification History",
+                        "Report",
+                        "Agent Notification report",
+                        "Agent Notification history",
+                        "Agent Notification activity",
+                        "email log",
+                        "email history",
+                        "sms log",
+                        "sms history",
+                        "push Agent notification log",
+                        "push Agent notification history"
+                    ]
+                },
+                {
+                    "title": "Merchant Notification",
+                    "icon": "las la-dot-circle",
+                    "route_name": "admin.report.merchant.notification.history",
+                    "menu_active": "admin.report.merchant.notification.history",
+                    "permission": [
+                        "view merchant notifications"
+                    ],
+                    "keyword": [
+                        "Merchant Notification History",
+                        "Report",
+                        "Merchant Notification report",
+                        "Merchant Notification history",
+                        "Merchant Notification activity",
+                        "email log",
+                        "email history",
+                        "sms log",
+                        "sms history",
+                        "push Merchant notification log",
+                        "push Merchant notification history"
+                    ]
+                },
+                {
+                    "title": "All Notification",
+                    "icon": "las la-dot-circle",
+                    "route_name": "admin.report.notification.history",
+                    "menu_active": "admin.report.notification.history",
+                    "permission": [
+                        "view all notifications"
+                    ],
+                    "keyword": [
+                        "Notification History",
+                        "Report",
+                        "Notification report",
+                        "Notification history",
+                        "Notification activity",
+                        "email log",
+                        "email history",
+                        "sms log",
+                        "sms history",
+                        "push notification log",
+                        "push notification history"
+                    ]
+                }
+            ]
+        }
+    ],
+    "promotion": [
+        {
+            "title": "Promotion/Offers",
+            "icon": "las la-tags",
+            "menu_active": [
+                "admin.banner.*",
+                "admin.promotion.offer.*"
+            ],
+            "permission": [
+                "manage banners",
+                "manage offers"
+            ],
+            "submenu": [
+                {
+                    "title": "Promotional Banner",
+                    "route_name": "admin.banner.all",
+                    "menu_active": "admin.banner.all",
+                    "keyword": [
+                        "banner",
+                        "Promotional banner",
+                        "Banner image"
+                    ],
+                    "permission": [
+                        "manage banners"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "Payment Offers",
+                        "offers"
+                    ],
+                    "title": "Payment Offers",
+                    "icon": "la la-wallet",
+                    "route_name": "admin.promotion.offer.index",
+                    "menu_active": "admin.promotion.offer.*",
+                    "permission": [
+                        "manage offers"
+                    ]
+                }
+            ]
+        }
+    ],
+    "settings": [
+        {
+            "title": "Manage Settings",
+            "icon": "las la-cog",
+            "menu_active": [
+                "admin.setting.general",
+                "admin.setting.brand",
+                "admin.setting.system.configuration",
+                "admin.module.setting",
+                "admin.api.config.reloadly",
+                "admin.maintenance.mode",
+                "admin.setting.qr.code",
+                "admin.operating.country.*",
+                "admin.api.setting"
+            ],
+            "permission": [
+                "update general settings",
+                "update brand settings",
+                "system configuration",
+                "notification settings",
+                "module settings",
+                "manage reloadly api",
+                "country settings",
+                "manage qr code",
+                "update maintenance mode"
+            ],
+            "submenu": [
+                {
+                    "title": "General Settings",
+                    "route_name": "admin.setting.general",
+                    "menu_active": "admin.setting.general",
+                    "keyword": [
+                        "general",
+                        "site information",
+                        "site settings",
+                        "currency format",
+                        "timezone"
+                    ],
+                    "permission": [
+                        "update general settings"
+                    ]
+                },
+                {
+                    "title": "Brand Setting",
+                    "route_name": "admin.setting.brand",
+                    "menu_active": "admin.setting.brand",
+                    "keyword": [
+                        "branding",
+                        "logo upload",
+                        "favicon",
+                        "website icon",
+                        "brand identity"
+                    ],
+                    "permission": [
+                        "update brand settings"
+                    ]
+                },
+                {
+                    "keyword": [
+                        "provider",
+                        "provider setting",
+                        "provider configuration",
+                        "airtime provider",
+                        "utility bill provider",
+                        "reloadly"
+                    ],
+                    "title": "API Provider Setting",
+                    "route_name": "admin.api.setting",
+                    "menu_active": "admin.api.setting",
+                    "permission": [
+                        "update general settings"
+                    ]
+                },
+                {
+                    "title": "System Configuration",
+                    "route_name": "admin.setting.system.configuration",
+                    "menu_active": "admin.setting.system.configuration",
+                    "keyword": [
+                        "basic modules",
+                        "system control",
+                        "force ssl",
+                        "kyc control",
+                        "language control"
+                    ],
+                    "permission": [
+                        "system configuration"
+                    ]
+                },
+                {
+                    "title": "Module Settings",
+                    "route_name": "admin.module.setting",
+                    "menu_active": "admin.module.setting",
+                    "keyword": [
+                        "module setting",
+                        "cash in",
+                        "cash out",
+                        "send money",
+                        "make payment",
+                        "mobile recharge",
+                        "utility bill",
+                        "donation",
+                        "bank transfer",
+                        "request money",
+                        "education fee",
+                        "microfinance",
+                        "withdraw money",
+                        "agent module",
+                        "user module",
+                        "merchant module"
+                    ],
+                    "permission": [
+                        "module settings"
+                    ]
+                },
+                {
+                    "title": "Operating Country",
+                    "route_name": "admin.operating.country.index",
+                    "menu_active": "admin.operating.country.*",
+                    "keyword": [
+                        "country",
+                        "supported country",
+                        "operating country"
+                    ],
+                    "permission": [
+                        "country settings"
+                    ]
+                },
+                {
+                    "title": "QR Code Template",
+                    "route_name": "admin.setting.qr.code",
+                    "menu_active": "admin.setting.qr.code",
+                    "keyword": [
+                        "qrcode",
+                        "qrcode template",
+                        "template"
+                    ],
+                    "permission": [
+                        "manage qr code"
+                    ]
+                },
+                {
+                    "title": "Maintenance Mode",
+                    "route_name": "admin.maintenance.mode",
+                    "menu_active": "admin.maintenance.mode",
+                    "keyword": [
+                        "maintenance mode",
+                        "system maintenance",
+                        "enable maintenance"
+                    ],
+                    "permission": [
+                        "update maintenance mode"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Notification Setting",
+            "icon": "las la-bell",
+            "menu_active": "admin.setting.notification.*",
+            "permission": [
+                "notification settings"
+            ],
+            "submenu": [
+                {
+                    "title": "Global Template",
+                    "route_name": "admin.setting.notification.global.email",
+                    "menu_active": "admin.setting.notification.global.*",
+                    "permission": [
+                        "notification settings"
+                    ],
+                    "keyword": [
+                        "email configuration",
+                        "email template",
+                        "global notification"
+                    ]
+                },
+                {
+                    "title": "Email Settings",
+                    "route_name": "admin.setting.notification.email",
+                    "menu_active": "admin.setting.notification.email",
+                    "permission": [
+                        "notification settings"
+                    ],
+                    "keyword": [
+                        "smtp",
+                        "sendgrid",
+                        "mailjet",
+                        "php mail"
+                    ]
+                },
+                {
+                    "title": "SMS Settings",
+                    "route_name": "admin.setting.notification.sms",
+                    "menu_active": "admin.setting.notification.sms",
+                    "permission": [
+                        "notification settings"
+                    ],
+                    "keyword": [
+                        "sms configure",
+                        "twilio",
+                        "clickatell",
+                        "infobip"
+                    ]
+                },
+                {
+                    "title": "Push Notifications",
+                    "route_name": "admin.setting.notification.push",
+                    "menu_active": "admin.setting.notification.push",
+                    "permission": [
+                        "notification settings"
+                    ],
+                    "keyword": [
+                        "firebase setting",
+                        "push notification template"
+                    ]
+                },
+                {
+                    "title": "Notification Templates",
+                    "route_name": "admin.setting.notification.templates",
+                    "menu_active": "admin.setting.notification.templates",
+                    "permission": [
+                        "notification settings"
+                    ],
+                    "keyword": [
+                        "email template",
+                        "sms template",
+                        "push notification template"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Security & Compliance",
+            "icon": "las la-user-check",
+            "menu_active": [
+                "admin.kyc.*",
+                "admin.setting.cookie",
+                "admin.cron.*"
+            ],
+            "permission": [
+                "security settings",
+                "seo settings",
+                "manage cron job"
+            ],
+            "submenu": [
+                {
+                    "title": "KYC Settings",
+                    "route_name": "admin.kyc.type",
+                    "menu_active": "admin.kyc.*",
+                    "permission": [
+                        "security settings"
+                    ],
+                    "keyword": [
+                        "kyc verification",
+                        "document upload",
+                        "compliance check",
+                        "kyc process",
+                        "aml verification"
+                    ]
+                },
+                {
+                    "title": "CRON Job Setting",
+                    "icon": "las la-clock",
+                    "route_name": "admin.cron.index",
+                    "menu_active": "admin.cron.*",
+                    "permission": [
+                        "manage cron job"
+                    ],
+                    "keyword": [
+                        "cron job",
+                        "scheduled tasks",
+                        "automated tasks",
+                        "task scheduling",
+                        "cron schedule",
+                        "cron configuration",
+                        "background jobs",
+                        "cron execution",
+                        "cron timing",
+                        "automation",
+                        "task automation",
+                        "cron logs",
+                        "job queue",
+                        "system tasks"
+                    ]
+                },
+                {
+                    "title": "GDPR & Cookies",
+                    "route_name": "admin.setting.cookie",
+                    "menu_active": "admin.setting.cookie",
+                    "permission": [
+                        "security settings"
+                    ],
+                    "keyword": [
+                        "GDPR cookie",
+                        "cookie policy",
+                        "data privacy"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "SEO & Optimization",
+            "icon": "las la-search",
+            "menu_active": [
+                "admin.setting.sitemap",
+                "admin.setting.custom.css",
+                "admin.setting.robot"
+            ],
+            "permission": [
+                "seo settings"
+            ],
+            "submenu": [
+                {
+                    "title": "Sitemap XML",
+                    "route_name": "admin.setting.sitemap",
+                    "menu_active": "admin.setting.sitemap",
+                    "permission": [
+                        "seo settings"
+                    ],
+                    "subtitle": "Insert the sitemap XML to enhance SEO performance.",
+                    "keyword": [
+                        "sitemap",
+                        "sitemap.xml"
+                    ]
+                },
+                {
+                    "title": "Robots.txt",
+                    "route_name": "admin.setting.robot",
+                    "menu_active": "admin.setting.robot",
+                    "subtitle": "Insert robots.txt to control bot crawlers.",
+                    "permission": [
+                        "seo settings"
+                    ],
+                    "keyword": [
+                        "robots.txt",
+                        "robot.txt"
+                    ]
+                },
+                {
+                    "title": "Custom CSS",
+                    "route_name": "admin.setting.custom.css",
+                    "menu_active": "admin.setting.custom.css",
+                    "permission": [
+                        "seo settings"
+                    ],
+                    "keyword": [
+                        "custom CSS",
+                        "modify styles",
+                        "frontend styling"
+                    ]
+                }
+            ]
+        }
+    ],
+    "frontend_manager": [
+        {
+            "title": "Manage Pages",
+            "icon": "las la-list",
+            "route_name": "admin.frontend.manage.pages",
+            "menu_active": [
+                "admin.frontend.manage.pages",
+                "admin.frontend.manage.section",
+                "admin.frontend.manage.pages.seo"
+            ],
+            "permission": [
+                "manage pages"
+            ],
+            "keyword": [
+                "page management",
+                "frontend pages",
+                "page editor",
+                "page creation",
+                "website pages",
+                "content management",
+                "page customization",
+                "page publishing",
+                "page settings",
+                "dynamic pages"
+            ]
+        },
+        {
+            "title": "Manage Sections",
+            "icon": "la la-html5",
+            "route_name": "admin.frontend.index",
+            "menu_active": [
+                "admin.frontend.index",
+                "admin.frontend.sections"
+            ],
+            "permission": [
+                "manage sections"
+            ],
+            "keyword": [
+                "section management",
+                "frontend sections",
+                "content sections",
+                "section editor",
+                "section customization",
+                "layout sections",
+                "html sections",
+                "dynamic sections",
+                "section templates",
+                "responsive sections"
+            ]
+        }
+    ],
+    "support_ticket": [
+        {
+            "title": "User Support Ticket",
+            "icon": "la la-ticket",
+            "menu_active": "admin.ticket.user.*",
+            "permission": [
+                "view user tickets",
+                "answer tickets",
+                "close tickets"
+            ],
+            "submenu": [
+                {
+                    "title": "Pending Ticket",
+                    "icon": "las la-dot-circle",
+                    "route_name": "admin.ticket.user.pending",
+                    "menu_active": "admin.ticket.user.pending",
+                    "counter": "pendingTicketCount",
+                    "permission": [
+                        "view user tickets"
+                    ],
+                    "keyword": [
+                        "user pending tickets",
+                        "user ticket management",
+                        "user support tickets",
+                        "user customer support",
+                        "user open tickets",
+                        "user ticket status",
+                        "user ticket resolution",
+                        "user ticket assignment",
+                        "user ticket prioritization"
+                    ]
+                },
+                {
+                    "title": "Closed Ticket",
+                    "icon": "las la-dot-circle",
+                    "route_name": "admin.ticket.user.closed",
+                    "menu_active": "admin.ticket.user.closed",
+                    "permission": [
+                        "view user tickets"
+                    ],
+                    "keyword": [
+                        "user closed tickets",
+                        "user ticket resolution",
+                        "user ticket history",
+                        "user resolved tickets",
+                        "user support tickets",
+                        "user customer support",
+                        "user ticket management",
+                        "user ticket tracking",
+                        "user ticket feedback",
+                        "user ticket archive",
+                        "user issue resolution",
+                        "user completed tickets"
+                    ]
+                },
+                {
+                    "title": "Answered Ticket",
+                    "icon": "las la-dot-circle",
+                    "route_name": "admin.ticket.user.answered",
+                    "menu_active": "admin.ticket.user.answered",
+                    "permission": [
+                        "view user tickets"
+                    ],
+                    "keyword": [
+                        "user answered tickets",
+                        "user ticket resolution",
+                        "user resolved tickets",
+                        "user customer support",
+                        "user support tickets",
+                        "user ticket management",
+                        "user response time",
+                        "user ticket history",
+                        "user customer feedback",
+                        "user ticket follow-up",
+                        "user closed tickets",
+                        "user communication logs"
+                    ]
+                },
+                {
+                    "title": "All Ticket",
+                    "icon": "las la-dot-circle",
+                    "route_name": "admin.ticket.user.index",
+                    "menu_active": "admin.ticket.user.index",
+                    "permission": [
+                        "view user tickets"
+                    ],
+                    "keyword": [
+                        "user all tickets",
+                        "user ticket management",
+                        "user support tickets",
+                        "user ticket overview",
+                        "user ticket status",
+                        "user customer inquiries",
+                        "user ticket tracking",
+                        "user ticket history",
+                        "user ticket filtering",
+                        "user ticket categorization",
+                        "user open tickets",
+                        "user closed tickets"
+                    ]
+                }
+            ],
+            "counters": [
+                "pendingTicketCount"
+            ]
+        },
+        {
+            "title": "Agent Support Ticket",
+            "icon": "la la-ticket",
+            "menu_active": "admin.ticket.agent.*",
+            "permission": [
+                "view agent tickets"
+            ],
+            "submenu": [
+                {
+                    "title": "Pending Ticket",
+                    "icon": "las la-dot-circle",
+                    "route_name": "admin.ticket.agent.pending",
+                    "menu_active": "admin.ticket.agent.pending",
+                    "counter": "pendingAgentTicketCount",
+                    "permission": [
+                        "view agent tickets"
+                    ],
+                    "keyword": [
+                        "agent pending tickets",
+                        "agent ticket management",
+                        "agent support tickets",
+                        "agent customer support",
+                        "agent open tickets",
+                        "agent ticket status",
+                        "agent ticket resolution",
+                        "agent ticket assignment",
+                        "agent ticket prioritization"
+                    ]
+                },
+                {
+                    "title": "Closed Ticket",
+                    "icon": "las la-dot-circle",
+                    "route_name": "admin.ticket.agent.closed",
+                    "menu_active": "admin.ticket.agent.closed",
+                    "permission": [
+                        "view agent tickets"
+                    ],
+                    "keyword": [
+                        "agent closed tickets",
+                        "agent ticket resolution",
+                        "agent ticket history",
+                        "agent resolved tickets",
+                        "agent support tickets",
+                        "agent customer support",
+                        "agent ticket management",
+                        "agent ticket tracking",
+                        "agent ticket feedback",
+                        "agent ticket archive",
+                        "agent issue resolution",
+                        "agent completed tickets"
+                    ]
+                },
+                {
+                    "title": "Answered Ticket",
+                    "icon": "las la-dot-circle",
+                    "route_name": "admin.ticket.agent.answered",
+                    "menu_active": "admin.ticket.agent.answered",
+                    "permission": [
+                        "view agent tickets"
+                    ],
+                    "keyword": [
+                        "agent answered tickets",
+                        "agent ticket resolution",
+                        "agent resolved tickets",
+                        "agent customer support",
+                        "agent support tickets",
+                        "agent ticket management",
+                        "agent response time",
+                        "agent ticket history",
+                        "agent customer feedback",
+                        "agent ticket follow-up",
+                        "agent closed tickets",
+                        "agent communication logs"
+                    ]
+                },
+                {
+                    "title": "All Ticket",
+                    "icon": "las la-dot-circle",
+                    "route_name": "admin.ticket.agent.index",
+                    "menu_active": "admin.ticket.agent.index",
+                    "permission": [
+                        "view agent tickets"
+                    ],
+                    "keyword": [
+                        "agent all tickets",
+                        "agent ticket management",
+                        "agent support tickets",
+                        "agent ticket overview",
+                        "agent ticket status",
+                        "agent customer inquiries",
+                        "agent ticket tracking",
+                        "agent ticket history",
+                        "agent ticket filtering",
+                        "agent ticket categorization",
+                        "agent open tickets",
+                        "agent closed tickets"
+                    ]
+                }
+            ],
+            "counters": [
+                "pendingAgentTicketCount"
+            ]
+        },
+        {
+            "title": "Merchant Support Ticket",
+            "icon": "la la-ticket",
+            "menu_active": "admin.ticket.merchant.*",
+            "permission": [
+                "view merchant tickets"
+            ],
+            "submenu": [
+                {
+                    "title": "Pending Ticket",
+                    "icon": "las la-dot-circle",
+                    "route_name": "admin.ticket.merchant.pending",
+                    "menu_active": "admin.ticket.merchant.pending",
+                    "counter": "pendingMerchantTicketCount",
+                    "permission": [
+                        "view merchant tickets"
+                    ],
+                    "keyword": [
+                        "merchant pending tickets",
+                        "merchant ticket management",
+                        "merchant support tickets",
+                        "merchant customer support",
+                        "merchant open tickets",
+                        "merchant ticket status",
+                        "merchant ticket resolution",
+                        "merchant ticket assignment",
+                        "merchant ticket prioritization"
+                    ]
+                },
+                {
+                    "title": "Closed Ticket",
+                    "icon": "las la-dot-circle",
+                    "route_name": "admin.ticket.merchant.closed",
+                    "menu_active": "admin.ticket.merchant.closed",
+                    "permission": [
+                        "view merchant tickets"
+                    ],
+                    "keyword": [
+                        "merchant closed tickets",
+                        "merchant ticket resolution",
+                        "merchant ticket history",
+                        "merchant resolved tickets",
+                        "merchant support tickets",
+                        "merchant customer support",
+                        "merchant ticket management",
+                        "merchant ticket tracking",
+                        "merchant ticket feedback",
+                        "merchant ticket archive",
+                        "merchant issue resolution",
+                        "merchant completed tickets"
+                    ]
+                },
+                {
+                    "title": "Answered Ticket",
+                    "icon": "las la-dot-circle",
+                    "route_name": "admin.ticket.merchant.answered",
+                    "menu_active": "admin.ticket.merchant.answered",
+                    "permission": [
+                        "view merchant tickets"
+                    ],
+                    "keyword": [
+                        "merchant answered tickets",
+                        "merchant ticket resolution",
+                        "merchant resolved tickets",
+                        "merchant customer support",
+                        "merchant support tickets",
+                        "merchant ticket management",
+                        "merchant response time",
+                        "merchant ticket history",
+                        "merchant customer feedback",
+                        "merchant ticket follow-up",
+                        "merchant closed tickets",
+                        "merchant communication logs"
+                    ]
+                },
+                {
+                    "title": "All Ticket",
+                    "icon": "las la-dot-circle",
+                    "route_name": "admin.ticket.merchant.index",
+                    "menu_active": "admin.ticket.merchant.index",
+                    "permission": [
+                        "view merchant tickets"
+                    ],
+                    "keyword": [
+                        "merchant all tickets",
+                        "merchant ticket management",
+                        "merchant support tickets",
+                        "merchant ticket overview",
+                        "merchant ticket status",
+                        "merchant customer inquiries",
+                        "merchant ticket tracking",
+                        "merchant ticket history",
+                        "merchant ticket filtering",
+                        "merchant ticket categorization",
+                        "merchant open tickets",
+                        "merchant closed tickets"
+                    ]
+                }
+            ],
+            "counters": [
+                "pendingMerchantTicketCount"
+            ]
+        }
+    ],
+    "other": [
+        {
+            "title": "Manage Subscriber",
+            "icon": "las la-inbox",
+            "route_name": "admin.subscriber.index",
+            "menu_active": "admin.subscriber.index",
+            "permission": [
+                "manage subscribers"
+            ],
+            "keyword": [
+                "subscriber management",
+                "manage subscribers",
+                "subscriber list",
+                "email subscribers",
+                "subscriber segmentation",
+                "subscription status",
+                "subscriber details",
+                "newsletter subscribers",
+                "subscriber preferences",
+                "unsubscribe management",
+                "subscriber analytics",
+                "contact management"
+            ]
+        },
+        {
+            "title": "Application Information",
+            "icon": "las la-folder-plus",
+            "route_name": "admin.system.info",
+            "menu_active": "admin.system.info",
+            "permission": [
+                "view application info"
+            ],
+            "keyword": [
+                "subscriber management",
+                "manage subscribers",
+                "subscriber list",
+                "email subscribers",
+                "subscriber segmentation",
+                "subscription status",
+                "subscriber details",
+                "newsletter subscribers",
+                "subscriber preferences",
+                "unsubscribe management",
+                "subscriber analytics",
+                "contact management"
+            ]
+        }
+    ]
+}
