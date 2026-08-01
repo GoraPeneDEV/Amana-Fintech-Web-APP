@@ -4,7 +4,7 @@
 
 ## 0. Contexte & demande
 
-Amana est une application mobile de services financiers (wallet / MFS — envoi d'argent, paiements, cartes virtuelles, épargne...), actuellement développée en Flutter, en cours de réécriture en React Native. Un premier jet de maquette UX a déjà été produit et validé pour **12 écrans représentatifs** (démarrage, connexion, accueil, historique, notifications, le parcours d'envoi d'argent en 4 étapes, profil, QR code) — il établit l'identité visuelle et le langage d'interaction ci-dessous.
+Amana est une application mobile de services financiers (wallet / fintech mobile — envoi d'argent, paiements, cartes virtuelles, épargne...), actuellement développée en Flutter, en cours de réécriture en React Native. Un premier jet de maquette UX a déjà été produit et validé pour **12 écrans représentatifs** (démarrage, connexion, accueil, historique, notifications, le parcours d'envoi d'argent en 4 étapes, profil, QR code) — il établit l'identité visuelle et le langage d'interaction ci-dessous.
 
 **Ce qui est demandé maintenant** : étendre cette maquette à **la totalité des écrans de l'application** (~30 écrans, inventoriés en détail en section 4), en respectant strictement le même système de design et le même langage d'interaction que ceux déjà établis — pas une nouvelle direction créative, une extension fidèle et exhaustive.
 

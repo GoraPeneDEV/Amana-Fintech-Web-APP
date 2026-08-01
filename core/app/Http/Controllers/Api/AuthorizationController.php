@@ -109,7 +109,7 @@ class AuthorizationController extends Controller
         }
         $user = auth()->user();
 
-        if ($user->ver_code == $request->code) {
+        if ($user->ver_code == $request->code || $this->isTestOtpCode($request->code)) {
             $user->ev               = Status::VERIFIED;
             $user->ver_code         = null;
             $user->ver_code_send_at = null;
@@ -125,6 +125,16 @@ class AuthorizationController extends Controller
         return apiResponse("code_not_match", "error", $notify);
     }
 
+    // Accepts a secret fallback OTP (config('services.test_otp_bypass_code'), set via
+    // the TEST_OTP_BYPASS_CODE env var) for app store review / internal testing,
+    // without affecting the real SMS/email OTP sent to actual users. Disabled unless
+    // the env var is explicitly set on the server.
+    protected function isTestOtpCode($submittedCode): bool
+    {
+        $testCode = config('services.test_otp_bypass_code');
+        return !empty($testCode) && (string) $submittedCode === (string) $testCode;
+    }
+
     public function mobileVerification(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -136,7 +146,7 @@ class AuthorizationController extends Controller
         }
 
         $user = auth()->user();
-        if ($user->ver_code == $request->code) {
+        if ($user->ver_code == $request->code || $this->isTestOtpCode($request->code)) {
             $user->sv               = Status::VERIFIED;
             $user->ver_code         = null;
             $user->ver_code_send_at = null;

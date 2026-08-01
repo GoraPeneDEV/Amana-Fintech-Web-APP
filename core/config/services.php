@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    // Secret fallback code accepted in addition to the real SMS/email OTP during
+    // registration verification (mobile/email). Used for app store review test
+    // accounts and internal testing only. Leave empty to disable entirely.
+    'test_otp_bypass_code' => env('TEST_OTP_BYPASS_CODE'),
+
 ];

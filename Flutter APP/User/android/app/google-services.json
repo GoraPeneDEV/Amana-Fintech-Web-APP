@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "546974559657",
+    "project_id": "amana-ff5e8",
+    "storage_bucket": "amana-ff5e8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546974559657:android:ee0623dabf6df20ff728b8",
+        "android_client_info": {
+          "package_name": "com.amanabank.clientapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFDoCzp_fsIPe4IoLtHVthLiwvW0jfczs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

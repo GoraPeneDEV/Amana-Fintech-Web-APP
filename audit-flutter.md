@@ -1,6 +1,6 @@
 # Audit de l'application Flutter « OvoPay » (`./Flutter APP/User`)
 
-> Généré le 2026-07-28. Audit exhaustif en lecture seule de l'app Flutter (package `ovopay`, wallet/MFS mobile) et de son backend Laravel (`./core`), en préparation de la migration vers React Native. Aucun fichier Flutter ni Laravel n'a été modifié pour produire ce document.
+> Généré le 2026-07-28. Audit exhaustif en lecture seule de l'app Flutter (package `ovopay`, wallet/fintech mobile) et de son backend Laravel (`./core`), en préparation de la migration vers React Native. Aucun fichier Flutter ni Laravel n'a été modifié pour produire ce document.
 
 ## Sommaire
 
@@ -23,7 +23,7 @@
 
 | Aspect | Constat |
 |---|---|
-| Nom du package | `ovopay` — « Complete Cross Platform MFS Solution » (mobile financial services / e-wallet) |
+| Nom du package | `ovopay` — application fintech mobile complète (services financiers mobiles / portefeuille électronique) |
 | State management | **GetX** (`get: ^4.7.3`) — `GetxController` + `update()` (builder pattern), **pas** de `.obs`/`Obx` réactif trouvé dans les écrans |
 | Navigation | GetX (`GetPage`/`Get.toNamed`/`Get.offAllNamed`), routes déclarées dans `lib/core/route/route.dart` (45 `GetPage`, ~30 fonctionnalités) |
 | Client HTTP | `dio: ^5.9.0`, encapsulé dans un service statique unique `ApiService` (`lib/core/data/services/api_service.dart`) |
