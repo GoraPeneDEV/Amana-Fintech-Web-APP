@@ -8,4 +8,5 @@
 # 2Checkout, Payeer, CoinbaseCommerce...) seeded from a real install - never commit.
 /install/database.sql
 /install/database.sql.bak-*
+/install/sync_to_production_*.sql
 /assets/admin/push_config.json
