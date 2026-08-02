@@ -85,7 +85,7 @@ class LoginController extends BioMetricController {
           }
           // Show an error if login failed
           CustomSnackBar.error(
-            errorList: loginModel.message ?? [MyStrings.loginFailedTryAgain],
+            errorList: loginModel.message ?? [MyStrings.loginFailedTryAgain.tr],
           );
         }
       } else {
@@ -98,7 +98,7 @@ class LoginController extends BioMetricController {
       printE('Stacktrace: $stackTrace');
 
       // Show a generic error message
-      CustomSnackBar.error(errorList: [MyStrings.somethingWentWrong]);
+      CustomSnackBar.error(errorList: [MyStrings.somethingWentWrong.tr]);
     } finally {
       // Reset the loading state
       isSubmitLoading = false;
@@ -164,7 +164,7 @@ class LoginController extends BioMetricController {
               Get.toNamed(RouteHelper.registrationScreen, arguments: user);
             } else {
               CustomSnackBar.error(
-                errorList: authorizationResponseModel.message ?? [MyStrings.loginFailedTryAgain],
+                errorList: authorizationResponseModel.message ?? [MyStrings.loginFailedTryAgain.tr],
               );
             }
           }
@@ -177,7 +177,7 @@ class LoginController extends BioMetricController {
           if (regModel.remark != "pin_required") {
             // Show an error if login failed
             CustomSnackBar.error(
-              errorList: regModel.message ?? [MyStrings.loginFailedTryAgain],
+              errorList: regModel.message ?? [MyStrings.loginFailedTryAgain.tr],
             );
           }
         }
@@ -191,7 +191,7 @@ class LoginController extends BioMetricController {
       printE('Stacktrace: $stackTrace');
 
       // Show a generic error message
-      CustomSnackBar.error(errorList: [MyStrings.somethingWentWrong]);
+      CustomSnackBar.error(errorList: [MyStrings.somethingWentWrong.tr]);
     } finally {
       // Reset the loading state
       isSubmitLoading = false;

@@ -55,7 +55,7 @@ class EmailVerificationController extends GetxController {
   UserModel? userModel;
   Future verifyYourEmail({required void Function() onSuccess}) async {
     if (otpController.text.trim().isEmpty) {
-      CustomSnackBar.error(errorList: [MyStrings.otpFieldEmptyMsg]);
+      CustomSnackBar.error(errorList: [MyStrings.otpFieldEmptyMsg.tr]);
       return;
     }
 
@@ -78,7 +78,7 @@ class EmailVerificationController extends GetxController {
         onSuccess();
       } else {
         CustomSnackBar.error(
-          errorList: model.message ?? [(MyStrings.emailVerificationFailed)],
+          errorList: model.message ?? [(MyStrings.emailVerificationFailed.tr)],
         );
       }
     } else {
@@ -101,12 +101,12 @@ class EmailVerificationController extends GetxController {
         if (model.status?.toLowerCase() == 'success') {
           otpController.text = "";
           CustomSnackBar.success(
-            successList: model.message ?? [MyStrings.successfullyCodeResend],
+            successList: model.message ?? [MyStrings.successfullyCodeResend.tr],
           );
           makeOtpExpired(false);
         } else {
           CustomSnackBar.error(
-            errorList: model.message ?? [MyStrings.resendCodeFail],
+            errorList: model.message ?? [MyStrings.resendCodeFail.tr],
           );
         }
       } else {

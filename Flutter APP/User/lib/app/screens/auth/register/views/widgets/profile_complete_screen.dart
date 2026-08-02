@@ -121,8 +121,8 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
                                         //Text Field
                                         RoundedTextField(
                                           controller: controller.fNameController,
-                                          labelText: MyStrings.firstName,
-                                          hintText: MyStrings.enterYourFirstName,
+                                          labelText: MyStrings.firstName.tr,
+                                          hintText: MyStrings.enterYourFirstName.tr,
                                           textInputAction: TextInputAction.next,
                                           keyboardType: TextInputType.name,
                                           validator: (value) {
@@ -136,8 +136,8 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
                                         spaceDown(Dimensions.space20),
                                         RoundedTextField(
                                           controller: controller.lNameController,
-                                          labelText: MyStrings.lastName,
-                                          hintText: MyStrings.enterYourLastName,
+                                          labelText: MyStrings.lastName.tr,
+                                          hintText: MyStrings.enterYourLastName.tr,
                                           textInputAction: TextInputAction.next,
                                           keyboardType: TextInputType.name,
                                           validator: (value) {
@@ -151,8 +151,8 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
                                         spaceDown(Dimensions.space20),
                                         RoundedTextField(
                                           controller: controller.uNameController,
-                                          labelText: MyStrings.username,
-                                          hintText: MyStrings.enterYourUsername,
+                                          labelText: MyStrings.username.tr,
+                                          hintText: MyStrings.enterYourUsername.tr,
                                           textInputAction: TextInputAction.next,
                                           keyboardType: TextInputType.name,
                                           validator: (value) {
@@ -166,8 +166,8 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
                                         spaceDown(Dimensions.space20),
                                         RoundedTextField(
                                           controller: controller.emailController,
-                                          labelText: MyStrings.email,
-                                          hintText: MyStrings.enterYourEmailExample,
+                                          labelText: MyStrings.email.tr,
+                                          hintText: MyStrings.enterYourEmailExample.tr,
                                           textInputAction: TextInputAction.next,
                                           keyboardType: TextInputType.emailAddress,
                                           validator: (value) {
@@ -198,32 +198,32 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
                                       children: [
                                         RoundedTextField(
                                           controller: controller.addressController,
-                                          labelText: MyStrings.address,
-                                          hintText: MyStrings.enterYourAddress,
+                                          labelText: MyStrings.address.tr,
+                                          hintText: MyStrings.enterYourAddress.tr,
                                           textInputAction: TextInputAction.next,
                                           keyboardType: TextInputType.name,
                                         ),
                                         spaceDown(Dimensions.space20),
                                         RoundedTextField(
                                           controller: controller.stateController,
-                                          labelText: MyStrings.state,
-                                          hintText: MyStrings.enterYourState,
+                                          labelText: MyStrings.state.tr,
+                                          hintText: MyStrings.enterYourState.tr,
                                           textInputAction: TextInputAction.next,
                                           keyboardType: TextInputType.name,
                                         ),
                                         spaceDown(Dimensions.space20),
                                         RoundedTextField(
                                           controller: controller.cityController,
-                                          labelText: MyStrings.city,
-                                          hintText: MyStrings.enterYourCity,
+                                          labelText: MyStrings.city.tr,
+                                          hintText: MyStrings.enterYourCity.tr,
                                           textInputAction: TextInputAction.done,
                                           keyboardType: TextInputType.name,
                                         ),
                                         spaceDown(Dimensions.space20),
                                         RoundedTextField(
                                           controller: controller.zipCodeController,
-                                          labelText: MyStrings.zipCode,
-                                          hintText: MyStrings.enterYourZipCode,
+                                          labelText: MyStrings.zipCode.tr,
+                                          hintText: MyStrings.enterYourZipCode.tr,
                                           textInputAction: TextInputAction.next,
                                           keyboardType: TextInputType.name,
                                         ),
@@ -246,8 +246,8 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
                                             //Pin
                                             RoundedTextField(
                                               controller: controller.pinController,
-                                              labelText: MyStrings.newPin,
-                                              hintText: MyStrings.enterYourPinCode,
+                                              labelText: MyStrings.newPin.tr,
+                                              hintText: MyStrings.enterYourPinCode.tr,
                                               textInputAction: TextInputAction.next,
                                               keyboardType: TextInputType.number,
                                               textInputFormatter: [
@@ -273,7 +273,7 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
                                             //Confirm pin
                                             RoundedTextField(
                                               controller: controller.cPinController,
-                                              labelText: MyStrings.confirmPin,
+                                              labelText: MyStrings.confirmPin.tr,
                                               keyboardType: TextInputType.number,
                                               textInputFormatter: [
                                                 FilteringTextInputFormatter.digitsOnly, // Allow only digits
@@ -281,7 +281,7 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
                                                   SharedPreferenceService.getMaxPinNumberDigit(),
                                                 ), // Limit to 5 characters
                                               ],
-                                              hintText: MyStrings.enterYourConfirmPinCode,
+                                              hintText: MyStrings.enterYourConfirmPinCode.tr,
                                               textInputAction: TextInputAction.done,
                                               isPassword: true,
                                               validator: (value) {
@@ -309,7 +309,7 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
                       radius: Dimensions.largeRadius.r,
                       bgColor: MyColor.getPrimaryColor(),
                       isLoading: controller.submitProfileCompleteLoading,
-                      text: widget.currentPage == 2 ? MyStrings.confirm : MyStrings.continueText,
+                      text: widget.currentPage == 2 ? MyStrings.confirm.tr : MyStrings.continueText.tr,
                       onTap: () {
                         MyUtils.clearAllTypeFocusNodes();
                         if (widget.pageController.page?.toInt() == 0) {

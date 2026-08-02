@@ -197,55 +197,61 @@ class _HomeScreenServiceMenuCardState extends State<HomeScreenServiceMenuCard> {
                   ),
                   spaceDown(Dimensions.space16),
                   //Action Icons
-                  GridView.count(
-                    padding: EdgeInsets.zero,
-                    scrollDirection: Axis.vertical,
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    // crossAxisCount: 4,
-                    crossAxisCount: ScreenUtil().screenWidth < 600 ? 4 : 6, // Set to 4 columns
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    children: [
-                      // Display visible services
-                      ...getVisibleServices.map(
-                        (service) => buildServiceItem(service),
-                      ),
-                      // Show "Less" button if expanded
-                      if (isExpanded)
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isExpanded = false;
-                            });
-                          },
-                          child: buildServiceItem(
-                            MenuItem(
-                              icon: MyIcons.moreIcon,
-                              label: MyStrings.less,
-                              isActive: true,
-                              activeColor: MyColor.orangeColor,
+                  AnimatedSize(
+                    duration: const Duration(milliseconds: 350),
+                    curve: Curves.easeInOut,
+                    alignment: Alignment.topCenter,
+                    child: GridView.count(
+                      padding: EdgeInsets.zero,
+                      scrollDirection: Axis.vertical,
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      // crossAxisCount: 4,
+                      crossAxisCount: ScreenUtil().screenWidth < 600 ? 4 : 6, // Set to 4 columns
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      children: [
+                        // Display visible services
+                        ...getVisibleServices.map(
+                          (service) => buildServiceItem(service),
+                        ),
+                        // Show "Less" button if expanded
+                        if (isExpanded)
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isExpanded = false;
+                              });
+                            },
+                            child: buildServiceItem(
+                              MenuItem(
+                                icon: MyIcons.moreIcon,
+                                label: MyStrings.less,
+                                isActive: true,
+                                activeColor: MyColor.orangeColor,
+                              ),
+                              rotateIcon: true,
                             ),
                           ),
-                        ),
-                      // Show "Other" button if not expanded and there are more items
-                      if (!isExpanded && getAllServices.length > visibleItemCount)
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isExpanded = true;
-                            });
-                          },
-                          child: buildServiceItem(
-                            MenuItem(
-                              icon: MyIcons.moreIcon,
-                              label: MyStrings.more,
-                              isActive: true,
-                              activeColor: MyColor.orangeColor,
+                        // Show "Other" button if not expanded and there are more items
+                        if (!isExpanded && getAllServices.length > visibleItemCount)
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isExpanded = true;
+                              });
+                            },
+                            child: buildServiceItem(
+                              MenuItem(
+                                icon: MyIcons.moreIcon,
+                                label: MyStrings.more,
+                                isActive: true,
+                                activeColor: MyColor.orangeColor,
+                              ),
                             ),
                           ),
-                        ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -254,7 +260,7 @@ class _HomeScreenServiceMenuCardState extends State<HomeScreenServiceMenuCard> {
         : SizedBox.shrink();
   }
 
-  Widget buildServiceItem(MenuItem service) {
+  Widget buildServiceItem(MenuItem service, {bool rotateIcon = false}) {
     return GestureDetector(
       onTap: service.onTap,
       child: Column(
@@ -267,12 +273,17 @@ class _HomeScreenServiceMenuCardState extends State<HomeScreenServiceMenuCard> {
             width: Dimensions.space48.h,
             height: Dimensions.space48.h,
             radius: Dimensions.largeRadius,
-            child: MyAssetImageWidget(
-              isSvg: true,
-              assetPath: service.icon,
-              width: Dimensions.space24.w,
-              height: Dimensions.space24.w,
-              color: service.activeColor,
+            child: AnimatedRotation(
+              turns: rotateIcon ? 0.5 : 0,
+              duration: const Duration(milliseconds: 350),
+              curve: Curves.easeInOut,
+              child: MyAssetImageWidget(
+                isSvg: true,
+                assetPath: service.icon,
+                width: Dimensions.space24.w,
+                height: Dimensions.space24.w,
+                color: service.activeColor,
+              ),
             ),
           ),
           spaceDown(Dimensions.space4),

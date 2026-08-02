@@ -82,12 +82,12 @@ class ForgetPinController extends GetxController {
 
         if (model.status == AppStatus.SUCCESS) {
           CustomSnackBar.success(
-            successList: model.message ?? [(MyStrings.requestSuccess)],
+            successList: model.message ?? [(MyStrings.requestSuccess.tr)],
           );
           onSuccess();
         } else {
           CustomSnackBar.error(
-            errorList: model.message ?? [(MyStrings.userNotFound)],
+            errorList: model.message ?? [(MyStrings.userNotFound.tr)],
           );
         }
       } else {
@@ -122,7 +122,7 @@ class ForgetPinController extends GetxController {
           onSuccess();
         } else {
           CustomSnackBar.error(
-            errorList: model.message ?? [(MyStrings.userNotFound)],
+            errorList: model.message ?? [(MyStrings.userNotFound.tr)],
           );
         }
       } else {
@@ -166,13 +166,13 @@ class ForgetPinController extends GetxController {
 
         if (model.status == AppStatus.SUCCESS) {
           CustomSnackBar.success(
-            successList: model.message ?? [(MyStrings.requestSuccess)],
+            successList: model.message ?? [(MyStrings.requestSuccess.tr)],
           );
 
           onSuccess();
         } else {
           CustomSnackBar.error(
-            errorList: model.message ?? [(MyStrings.userNotFound)],
+            errorList: model.message ?? [(MyStrings.userNotFound.tr)],
           );
         }
       } else {

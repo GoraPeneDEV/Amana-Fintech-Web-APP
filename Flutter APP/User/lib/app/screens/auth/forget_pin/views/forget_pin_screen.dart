@@ -86,7 +86,7 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
   Widget build(BuildContext context) {
     return MyCustomScaffold(
       // hideAppBar: _currentPage == 0,
-      pageTitle: MyStrings.forgetPin,
+      pageTitle: MyStrings.forgetPin.tr,
       onBackButtonTap: () {
         if (_currentPage != 0) {
           _previousPage();
@@ -130,7 +130,7 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
           CustomElevatedBtn(
             radius: Dimensions.largeRadius.r,
             bgColor: MyColor.getPrimaryColor(),
-            text: MyStrings.resetPin,
+            text: MyStrings.resetPin.tr,
             onTap: () async {
               _nextPage(goToPage: 1);
             },
@@ -267,7 +267,7 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
               radius: Dimensions.largeRadius.r,
               isLoading: controller.submitLoading,
               bgColor: MyColor.getPrimaryColor(),
-              text: MyStrings.confirm,
+              text: MyStrings.confirm.tr,
               onTap: () {
                 if (formKey1.currentState?.validate() ?? false) {
                   printW("validated");
@@ -328,7 +328,7 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
             radius: Dimensions.largeRadius.r,
             isLoading: controller.submitLoading,
             bgColor: MyColor.getPrimaryColor(),
-            text: MyStrings.verifyNow,
+            text: MyStrings.verifyNow.tr,
             onTap: () {
               controller.verifyYourMobileNoAndCode(
                 onSuccess: () {
@@ -403,8 +403,8 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
                       RoundedTextField(
                         controller: controller.pinController,
                         focusNode: controller.pinFocusNode,
-                        labelText: MyStrings.newPin,
-                        hintText: MyStrings.enterYourPinCode,
+                        labelText: MyStrings.newPin.tr,
+                        hintText: MyStrings.enterYourPinCode.tr,
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
                         isPassword: true,
@@ -432,8 +432,8 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
                       RoundedTextField(
                         controller: controller.cPinController,
                         focusNode: controller.cPinFocusNode,
-                        labelText: MyStrings.confirmPin,
-                        hintText: MyStrings.enterYourConfirmPinCode,
+                        labelText: MyStrings.confirmPin.tr,
+                        hintText: MyStrings.enterYourConfirmPinCode.tr,
                         textInputAction: TextInputAction.done,
                         keyboardType: TextInputType.number,
                         isPassword: true,
@@ -463,7 +463,7 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
             isLoading: controller.submitLoading,
             radius: Dimensions.largeRadius.r,
             bgColor: MyColor.getPrimaryColor(),
-            text: MyStrings.continueText,
+            text: MyStrings.continueText.tr,
             onTap: () {
               if (formKey2.currentState?.validate() ?? false) {
                 printW("validated");
@@ -483,7 +483,7 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
             radius: Dimensions.largeRadius.r,
             bgColor: MyColor.getWhiteColor(),
             textColor: MyColor.getDarkColor(),
-            text: MyStrings.cancel,
+            text: MyStrings.cancel.tr,
             borderColor: MyColor.getBorderColor(),
             shadowColor: MyColor.getWhiteColor(),
             onTap: () {
@@ -535,7 +535,7 @@ class _ForgotPinScreenState extends State<ForgotPinScreen> {
               CustomElevatedBtn(
                 radius: Dimensions.largeRadius.r,
                 bgColor: MyColor.getPrimaryColor(),
-                text: MyStrings.login,
+                text: MyStrings.login.tr,
                 onTap: () {
                   Get.offAndToNamed(RouteHelper.loginScreen);
                 },

@@ -171,7 +171,7 @@ class BioMetricController extends GetxController {
       onSuccess();
       onDisableSuccess();
     } catch (e) {
-      CustomSnackBar.error(errorList: [MyStrings.requestFail]);
+      CustomSnackBar.error(errorList: [MyStrings.requestFail.tr]);
     } finally {
       isPinValidateLoading = false;
       update();
@@ -179,7 +179,7 @@ class BioMetricController extends GetxController {
   }
 
   void _handleError(List<String>? errorMessage) {
-    CustomSnackBar.error(errorList: errorMessage ?? [MyStrings.requestFail]);
+    CustomSnackBar.error(errorList: errorMessage ?? [MyStrings.requestFail.tr]);
     isPinValidateLoading = false;
     update();
   }

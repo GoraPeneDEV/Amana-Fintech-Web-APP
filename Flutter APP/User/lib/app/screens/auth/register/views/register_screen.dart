@@ -102,12 +102,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
           onConfirmTap: () {
             Get.offAllNamed(RouteHelper.loginScreen);
           },
-          title: MyStrings.exitTitle,
-          subTitle: MyStrings.youWantToExitRegistrationProcess,
+          title: MyStrings.exitTitle.tr,
+          subTitle: MyStrings.youWantToExitRegistrationProcess.tr,
         );
       },
       child: MyCustomScaffold(
-        pageTitle: MyStrings.register,
+        pageTitle: MyStrings.register.tr,
         onBackButtonTap: () {
           if (_currentPage2 == 0) {
             AppDialogs.confirmDialogForAll(
@@ -115,8 +115,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               onConfirmTap: () {
                 Get.offAllNamed(RouteHelper.loginScreen);
               },
-              title: MyStrings.exitTitle,
-              subTitle: MyStrings.youWantToExitRegistrationProcess,
+              title: MyStrings.exitTitle.tr,
+              subTitle: MyStrings.youWantToExitRegistrationProcess.tr,
             );
           }
           if (_currentPage2 == 1 || _currentPage2 == 2) {
@@ -199,7 +199,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             radius: Dimensions.largeRadius.r,
             isLoading: controller.submitLoading,
             bgColor: MyColor.getPrimaryColor(),
-            text: MyStrings.verifyNow,
+            text: MyStrings.verifyNow.tr,
             onTap: () {
               controller.verifyYourSms(
                 onSuccess: () {

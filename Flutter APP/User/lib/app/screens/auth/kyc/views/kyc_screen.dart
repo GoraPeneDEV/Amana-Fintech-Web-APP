@@ -224,7 +224,7 @@ class _KycScreenState extends State<KycScreen> {
                                     radius: Dimensions.largeRadius.r,
                                     bgColor: MyColor.getPrimaryColor(),
                                     isLoading: controller.submitLoading,
-                                    text: MyStrings.continueText,
+                                    text: MyStrings.continueText.tr,
                                     onTap: () {
                                       MyUtils.clearAllTypeFocusNodes();
                                       if (formKey.currentState?.validate() ?? false) {

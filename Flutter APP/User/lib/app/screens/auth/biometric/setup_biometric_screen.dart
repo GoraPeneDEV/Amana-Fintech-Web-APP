@@ -36,7 +36,7 @@ class _SetupFingerPrintScreenState extends State<SetupFingerPrintScreen> {
     return GetBuilder<BioMetricController>(
       builder: (controller) {
         return MyCustomScaffold(
-          pageTitle: MyStrings.touchORFaceID,
+          pageTitle: MyStrings.touchORFaceID.tr,
           body: SingleChildScrollView(
             child: CustomAppCard(
               child: Column(
@@ -65,7 +65,7 @@ class _SetupFingerPrintScreenState extends State<SetupFingerPrintScreen> {
                       radius: Dimensions.largeRadius.r,
                       bgColor: MyColor.getWhiteColor(),
                       textColor: SharedPreferenceService.getBioMetricStatus() ? MyColor.error : MyColor.getPrimaryColor(),
-                      text: SharedPreferenceService.getBioMetricStatus() ? MyStrings.disableTouchORFaceID : MyStrings.getStarted,
+                      text: SharedPreferenceService.getBioMetricStatus() ? MyStrings.disableTouchORFaceID.tr : MyStrings.getStarted.tr,
                       // text: MyStrings.getStarted,
                       borderColor: SharedPreferenceService.getBioMetricStatus() ? MyColor.error : MyColor.getPrimaryColor(),
                       shadowColor: MyColor.getWhiteColor(),
@@ -87,8 +87,8 @@ class _SetupFingerPrintScreenState extends State<SetupFingerPrintScreen> {
                   ] else ...[
                     RoundedTextField(
                       controller: controller.pinCodeController,
-                      labelText: MyStrings.pin,
-                      hintText: MyStrings.enterYourPinCode,
+                      labelText: MyStrings.pin.tr,
+                      hintText: MyStrings.enterYourPinCode.tr,
                       textInputAction: TextInputAction.done,
                       keyboardType: TextInputType.number,
                       isPassword: true,
@@ -115,7 +115,7 @@ class _SetupFingerPrintScreenState extends State<SetupFingerPrintScreen> {
                         elevation: 0,
                         radius: Dimensions.largeRadius.r,
                         bgColor: MyColor.error,
-                        text: MyStrings.confirm,
+                        text: MyStrings.confirm.tr,
                         onTap: () async {
                           MyUtils.clearAllTypeFocusNodes();
                           if (controller.pinCodeController.text.toString().length < SharedPreferenceService.getMaxPinNumberDigit()) {
@@ -146,7 +146,7 @@ class _SetupFingerPrintScreenState extends State<SetupFingerPrintScreen> {
                         elevation: 0,
                         radius: Dimensions.largeRadius.r,
                         bgColor: MyColor.getPrimaryColor(),
-                        text: MyStrings.confirm,
+                        text: MyStrings.confirm.tr,
                         onTap: () async {
                           MyUtils.clearAllTypeFocusNodes();
                           if (controller.pinCodeController.text.toString().length < SharedPreferenceService.getMaxPinNumberDigit()) {

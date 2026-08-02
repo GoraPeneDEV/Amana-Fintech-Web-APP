@@ -211,18 +211,20 @@ class ApiService {
         formData.fields.add(MapEntry(key, value.toString()));
       });
 
-      // Add files to the FormData with dynamic keys
-      files.forEach((key, file) async {
+      // Add files to the FormData with dynamic keys.
+      // Must be awaited one by one (not Map.forEach, which does not wait for
+      // async callbacks) so every file is attached before the request is sent.
+      for (final entry in files.entries) {
         formData.files.add(
           MapEntry(
-            key, // Dynamic key for each file
+            entry.key, // Dynamic key for each file
             await MultipartFile.fromFile(
-              file.path,
-              filename: file.path.split('/').last,
+              entry.value.path,
+              filename: entry.value.path.split('/').last,
             ),
           ),
         );
-      });
+      }
 
       // Make the POST request
       Response response = await _dio.post(endpoint, data: formData);

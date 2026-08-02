@@ -16,13 +16,37 @@ class PaymentController extends Controller
         $gatewayCurrency = GatewayCurrency::whereHas('method', function ($gate) {
             $gate->where('status', Status::ENABLE);
         })->with('method')->orderby('method_code')->get();
-        
+
+        $gatewayCurrency = $this->filterByUserCountry($gatewayCurrency);
+
         $notify[] = 'Add Money Methods';
 
         return apiResponse("deposit_methods", "success", $notify, [
             'methods'    => $gatewayCurrency,
             'image_path' => getFilePath('gateway')
         ]);
+    }
+
+    /**
+     * Country-scoped gateways (e.g. PawaPay mobile money) configure a separate
+     * gateway_currency per country/correspondent, with the country code stored
+     * in gateway_parameter->country. For those, only surface the entry matching
+     * the connected user's own country_code, so a user in Gabon automatically
+     * sees the XAF option and a user in Senegal automatically sees XOF, instead
+     * of manually picking a currency. Gateways whose currencies have no
+     * `country` in their parameters (Stripe, InTouch, ...) are left untouched.
+     */
+    private function filterByUserCountry($gatewayCurrency)
+    {
+        $userCountryCode = auth()->user()->country_code ?? null;
+
+        return $gatewayCurrency->filter(function ($currency) use ($userCountryCode) {
+            $params = json_decode($currency->gateway_parameter ?? '{}');
+            if (!isset($params->country) || $params->country === '') {
+                return true;
+            }
+            return $userCountryCode && strcasecmp($params->country, $userCountryCode) === 0;
+        })->values();
     }
 
     public function depositInsert(Request $request)

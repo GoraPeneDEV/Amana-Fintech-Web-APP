@@ -8,7 +8,6 @@ import 'package:ovopay/core/data/models/global/qr_code/scan_qr_code_response_mod
 import 'package:ovopay/core/data/services/service_exporter.dart';
 import 'package:ovopay/core/route/route.dart';
 import 'package:ovopay/core/utils/util_exporter.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class HomeScreenBalanceCard extends StatelessWidget {
   const HomeScreenBalanceCard({super.key});
@@ -23,6 +22,13 @@ class HomeScreenBalanceCard extends StatelessWidget {
           fit: BoxFit.cover,
         ),
         borderRadius: BorderRadius.circular(Dimensions.cardExtraRadius.r),
+        boxShadow: [
+          BoxShadow(
+            color: MyColor.getPrimaryColor().withValues(alpha: 0.25),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,12 +64,21 @@ class HomeScreenBalanceCard extends StatelessWidget {
                 // QR Code with PopupMenuButton
                 PopupMenuButton<String>(
                   surfaceTintColor: Colors.transparent,
-                  icon: MyAssetImageWidget(
-                    // color: MyColor.getPrimaryColor(),
-                    isSvg: true,
-                    assetPath: MyIcons.walletQrCodeIcon,
-                    width: Dimensions.space40.w,
-                    height: Dimensions.space40.w,
+                  padding: EdgeInsets.zero,
+                  icon: CustomAppCard(
+                    height: Dimensions.space40,
+                    width: Dimensions.space40,
+                    showBorder: false,
+                    radius: Dimensions.radiusProMax,
+                    backgroundColor: MyColor.black.withValues(alpha: 0.5),
+                    padding: EdgeInsets.all(Dimensions.space8),
+                    child: MyAssetImageWidget(
+                      isSvg: true,
+                      assetPath: MyIcons.walletQrCodeIcon,
+                      color: MyColor.getWhiteColor(),
+                      width: Dimensions.space22.w,
+                      height: Dimensions.space22.w,
+                    ),
                   ),
                   position: PopupMenuPosition.under,
                   color: MyColor.getScreenBgColor(),
@@ -189,14 +204,22 @@ class HomeScreenBalanceCard extends StatelessWidget {
                     fit: BoxFit.scaleDown,
                     child: Row(
                       children: [
-                        Text(
-                          homeController.isBalanceVisible ? MyUtils.getUserAmount(homeController.accountBalanceFormatted) : "•••••••••",
-                          overflow: TextOverflow.ellipsis,
-                          style: MyTextStyle.balanceCardTextStyle.copyWith(
-                            color: MyColor.getWhiteColor(),
-                            fontSize: homeController.isBalanceVisible ? Dimensions.space35.sp : Dimensions.space50.sp,
+                        AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 250),
+                          transitionBuilder: (child, animation) => FadeTransition(
+                            opacity: animation,
+                            child: ScaleTransition(scale: animation, child: child),
                           ),
-                          maxLines: 1,
+                          child: Text(
+                            homeController.isBalanceVisible ? MyUtils.getUserAmount(homeController.accountBalanceFormatted) : "•••••••••",
+                            key: ValueKey(homeController.isBalanceVisible),
+                            overflow: TextOverflow.ellipsis,
+                            style: MyTextStyle.balanceCardTextStyle.copyWith(
+                              color: MyColor.getWhiteColor(),
+                              fontSize: homeController.isBalanceVisible ? Dimensions.space35.sp : Dimensions.space50.sp,
+                            ),
+                            maxLines: 1,
+                          ),
                         ),
                         spaceSide(Dimensions.space10),
                         CustomAppCard(
@@ -208,10 +231,18 @@ class HomeScreenBalanceCard extends StatelessWidget {
                           padding: EdgeInsets.all(Dimensions.space8),
                           child: FittedBox(
                             fit: BoxFit.scaleDown,
-                            child: Icon(
-                              homeController.isBalanceVisible == true ? CupertinoIcons.eye : CupertinoIcons.eye_slash,
-                              color: MyColor.getWhiteColor(),
-                              size: Dimensions.space30,
+                            child: AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 250),
+                              transitionBuilder: (child, animation) => FadeTransition(
+                                opacity: animation,
+                                child: ScaleTransition(scale: animation, child: child),
+                              ),
+                              child: Icon(
+                                homeController.isBalanceVisible == true ? CupertinoIcons.eye : CupertinoIcons.eye_slash,
+                                key: ValueKey(homeController.isBalanceVisible),
+                                color: MyColor.getWhiteColor(),
+                                size: Dimensions.space30,
+                              ),
                             ),
                           ),
                         )
@@ -222,138 +253,7 @@ class HomeScreenBalanceCard extends StatelessWidget {
               );
             },
           ),
-          if (SharedPreferenceService.getModuleStatusByKey("add_money") ||
-              SharedPreferenceService.getModuleStatusByKey("send_money") ||
-              SharedPreferenceService.getModuleStatusByKey("make_payment") ||
-              SharedPreferenceService.getModuleStatusByKey("cash_out") ||
-              SharedPreferenceService.getModuleStatusByKey(
-                "request_money",
-              )) ...[
-            spaceDown(Dimensions.space20),
-
-            // Action Icons
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                if (SharedPreferenceService.getModuleStatusByKey(
-                  "add_money",
-                )) ...[
-                  Flexible(
-                    child: buildBalanceCardActionIcon(
-                      iconImage: MyIcons.walletAddIcon,
-                      titleText: MyStrings.addMoney,
-                      onTap: () {
-                        Get.toNamed(RouteHelper.addMoneyScreen);
-                      },
-                    ),
-                  ),
-                ],
-                if (SharedPreferenceService.getModuleStatusByKey(
-                  "send_money",
-                )) ...[
-                  Flexible(
-                    child: buildBalanceCardActionIcon(
-                      iconImage: MyIcons.sendIcon,
-                      titleText: MyStrings.sendMoney,
-                      onTap: () {
-                        Get.toNamed(RouteHelper.sendMoneyScreen);
-                      },
-                    ),
-                  ),
-                ],
-                if (SharedPreferenceService.getModuleStatusByKey(
-                  "cash_out",
-                )) ...[
-                  Flexible(
-                    child: buildBalanceCardActionIcon(
-                      iconImage: MyIcons.cashOutIcon,
-                      titleText: MyStrings.cashOut,
-                      onTap: () {
-                        Get.toNamed(RouteHelper.cashOutScreen);
-                      },
-                    ),
-                  ),
-                ],
-                if (SharedPreferenceService.getModuleStatusByKey(
-                  "make_payment",
-                )) ...[
-                  Flexible(
-                    child: buildBalanceCardActionIcon(
-                      iconImage: MyIcons.paymentIcon,
-                      titleText: MyStrings.payment,
-                      onTap: () {
-                        Get.toNamed(RouteHelper.paymentScreen);
-                      },
-                    ),
-                  ),
-                ],
-                if (SharedPreferenceService.getModuleStatusByKey(
-                  "request_money",
-                )) ...[
-                  Flexible(
-                    child: buildBalanceCardActionIcon(
-                      iconImage: MyIcons.requestIcon,
-                      titleText: MyStrings.requestMoney,
-                      onTap: () {
-                        Get.toNamed(RouteHelper.requestMoneyScreen);
-                      },
-                    ),
-                  ),
-                ],
-              ],
-            ),
-          ] else ...[
-            spaceDown(Dimensions.space10),
-          ],
-        ],
-      ),
-    );
-  }
-
-  InkWell buildBalanceCardActionIcon({
-    String iconImage = "",
-    String titleText = "",
-    VoidCallback? onTap,
-  }) {
-    return InkWell(
-      onTap: onTap,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Skeleton.replace(
-            replace: true,
-            replacement: Bone.square(size: Dimensions.space40.h),
-            child: CustomAppCard(
-              showBorder: false,
-              backgroundColor: MyColor.black.withValues(alpha: 0.5),
-              padding: EdgeInsets.all(Dimensions.space10),
-              width: Dimensions.space40.h,
-              height: Dimensions.space40.h,
-              radius: Dimensions.space12,
-              child: MyAssetImageWidget(
-                isSvg: true,
-                assetPath: iconImage,
-                color: MyColor.getWhiteColor(),
-                width: Dimensions.space24.h,
-                height: Dimensions.space24.h,
-              ),
-            ),
-          ),
-          spaceDown(Dimensions.space4),
-          FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Text(
-              titleText.tr,
-              textAlign: TextAlign.center,
-              style: MyTextStyle.caption2Style.copyWith(
-                fontSize: Dimensions.fontSmall,
-                color: MyColor.getWhiteColor(),
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
+          spaceDown(Dimensions.space16),
         ],
       ),
     );

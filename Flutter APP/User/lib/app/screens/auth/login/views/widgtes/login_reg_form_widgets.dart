@@ -106,8 +106,8 @@ class LoginRegFormsWidgets extends StatelessWidget {
                     spaceDown(Dimensions.space24),
                     RoundedTextField(
                       controller: controller.pinController,
-                      labelText: MyStrings.pin,
-                      hintText: MyStrings.enterYourPinCode,
+                      labelText: MyStrings.pin.tr,
+                      hintText: MyStrings.enterYourPinCode.tr,
                       textInputAction: TextInputAction.done,
                       keyboardType: TextInputType.number,
                       isPassword: true,

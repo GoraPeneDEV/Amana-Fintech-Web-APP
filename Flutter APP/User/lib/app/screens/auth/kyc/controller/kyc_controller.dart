@@ -60,7 +60,7 @@ class KycController extends GetxController {
         if (model.remark?.toLowerCase() == 'already_verified') {
           isAlreadyVerified = true;
           CustomSnackBar.success(
-            successList: model.message ?? [MyStrings.kycAlreadyVerifiedMsg],
+            successList: model.message ?? [MyStrings.kycAlreadyVerifiedMsg.tr],
           );
           // Get.offAllNamed(RouteHelper.kycScreen);
         } else if (model.remark?.toLowerCase() == 'under_review') {
@@ -99,22 +99,26 @@ class KycController extends GetxController {
     submitLoading = true;
     update();
 
-    AuthorizationResponseModel response = await repo.submitKycData(formList);
+    try {
+      AuthorizationResponseModel response = await repo.submitKycData(formList);
 
-    if (response.status?.toLowerCase() == AppStatus.SUCCESS.toLowerCase()) {
-      isAlreadyPending = true;
-      Get.find<KycController>().beforeInitLoadKycData();
-      CustomSnackBar.success(
-        successList: response.message ?? [MyStrings.requestSuccess.tr],
-      );
-    } else {
-      CustomSnackBar.error(
-        errorList: response.message ?? [MyStrings.requestFail.tr],
-      );
+      if (response.status?.toLowerCase() == AppStatus.SUCCESS.toLowerCase()) {
+        isAlreadyPending = true;
+        Get.find<KycController>().beforeInitLoadKycData();
+        CustomSnackBar.success(
+          successList: response.message ?? [MyStrings.requestSuccess.tr],
+        );
+      } else {
+        CustomSnackBar.error(
+          errorList: response.message ?? [MyStrings.requestFail.tr],
+        );
+      }
+    } catch (e) {
+      CustomSnackBar.error(errorList: [MyStrings.requestFail.tr]);
+    } finally {
+      submitLoading = false;
+      update();
     }
-
-    submitLoading = false;
-    update();
   }
 
   List<String> hasError() {

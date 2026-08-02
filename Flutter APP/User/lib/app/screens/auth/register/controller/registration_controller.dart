@@ -164,12 +164,12 @@ class RegistrationController extends GetxController {
         if (model.status?.toLowerCase() == 'success') {
           otpController.text = "";
           CustomSnackBar.success(
-            successList: model.message ?? [MyStrings.successfullyCodeResend],
+            successList: model.message ?? [MyStrings.successfullyCodeResend.tr],
           );
           makeOtpExpired(false);
         } else {
           CustomSnackBar.error(
-            errorList: model.message ?? [MyStrings.resendCodeFail],
+            errorList: model.message ?? [MyStrings.resendCodeFail.tr],
           );
         }
       } else {
@@ -220,7 +220,7 @@ class RegistrationController extends GetxController {
           );
         } else {
           CustomSnackBar.error(
-            errorList: model.message ?? [MyStrings.requestFail],
+            errorList: model.message ?? [MyStrings.requestFail.tr],
           );
         }
       } else {

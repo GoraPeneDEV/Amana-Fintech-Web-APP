@@ -47,7 +47,7 @@ class _AlreadyVerifiedWidgetState extends State<AlreadyVerifiedWidget> {
                       CustomElevatedBtn(
                         radius: Dimensions.largeRadius.r,
                         bgColor: MyColor.getPrimaryColor(),
-                        text: MyStrings.home,
+                        text: MyStrings.home.tr,
                         onTap: () {
                           Get.offAllNamed(RouteHelper.dashboardScreen);
                         },

@@ -54,7 +54,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return MyCustomScaffold(
-      pageTitle: MyStrings.emailVerification,
+      pageTitle: MyStrings.emailVerification.tr,
       onBackButtonTap: () {
         Get.offAllNamed(RouteHelper.loginScreen);
       },
@@ -120,7 +120,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 isLoading: controller.submitLoading,
                 radius: Dimensions.largeRadius.r,
                 bgColor: MyColor.getPrimaryColor(),
-                text: MyStrings.verifyNow,
+                text: MyStrings.verifyNow.tr,
                 onTap: () {
                   controller.verifyYourEmail(
                     onSuccess: () {
@@ -206,7 +206,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   CustomElevatedBtn(
                     radius: Dimensions.largeRadius.r,
                     bgColor: MyColor.getPrimaryColor(),
-                    text: MyStrings.continueText,
+                    text: MyStrings.continueText.tr,
                     onTap: () {
                       RouteHelper.checkUserStatusAndGoToNextStep(
                         controller.userModel,
