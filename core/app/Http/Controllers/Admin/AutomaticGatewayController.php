@@ -133,6 +133,98 @@ class AutomaticGatewayController extends Controller
         return back()->withNotify($notify);
     }
 
+    // ISO 3166-1 alpha-2 -> alpha-3, for the countries our `country` field
+    // (alpha-2, shared with operating_countries/users.country_code) needs to
+    // be translated to when calling PawaPay's alpha-3-only active-conf API.
+    // Add more entries here as new operating countries are enabled.
+    private const ISO2_TO_ISO3 = [
+        'GA' => 'GAB', 'SN' => 'SEN', 'CI' => 'CIV', 'CM' => 'CMR', 'TD' => 'TCD',
+        'CG' => 'COG', 'CD' => 'COD', 'BJ' => 'BEN', 'TG' => 'TGO', 'BF' => 'BFA',
+        'ML' => 'MLI', 'NE' => 'NER', 'GH' => 'GHA', 'KE' => 'KEN', 'UG' => 'UGA',
+        'ZM' => 'ZMB', 'RW' => 'RWA', 'TZ' => 'TZA', 'NG' => 'NGA',
+    ];
+
+    /**
+     * Live-syncs the mobile money operators for one PawaPay gateway_currency
+     * from PawaPay's own /v2/active-conf endpoint, replacing the manually
+     * typed `correspondents` JSON with verified provider codes straight from
+     * the merchant's own PawaPay account — no manual code entry needed.
+     */
+    public function syncOperators($id)
+    {
+        $gatewayCurrency = GatewayCurrency::with('method')->findOrFail($id);
+
+        if (($gatewayCurrency->method->alias ?? null) !== 'PawaPay') {
+            $notify[] = ['error', 'Operator sync is only available for PawaPay currencies'];
+            return back()->withNotify($notify);
+        }
+
+        $params = json_decode($gatewayCurrency->gateway_parameter ?? '{}');
+        $countryIso2 = strtoupper($params->country ?? '');
+        $countryIso3 = self::ISO2_TO_ISO3[$countryIso2] ?? null;
+
+        if (!$countryIso3) {
+            $notify[] = ['error', "Country \"$countryIso2\" is not in the ISO2→ISO3 mapping yet — add it to AutomaticGatewayController::ISO2_TO_ISO3."];
+            return back()->withNotify($notify);
+        }
+
+        $environment = strtolower($params->environment ?? 'sandbox');
+        $baseUrl = $environment === 'production' ? 'https://api.pawapay.io' : 'https://api.sandbox.pawapay.io';
+
+        $ch = curl_init($baseUrl . '/v2/active-conf?country=' . $countryIso3 . '&operationType=DEPOSIT');
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 20,
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: application/json',
+                'Authorization: Bearer ' . ($params->api_token ?? ''),
+            ],
+        ]);
+        $response = curl_exec($ch);
+        $curlError = curl_error($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($curlError) {
+            $notify[] = ['error', 'Unable to reach PawaPay: ' . $curlError];
+            return back()->withNotify($notify);
+        }
+
+        $result = json_decode($response, true);
+
+        if ($httpCode !== 200) {
+            $message = $result['failureReason']['failureMessage'] ?? 'PawaPay rejected the request.';
+            $notify[] = ['error', 'PawaPay sync failed: ' . $message];
+            return back()->withNotify($notify);
+        }
+
+        $providers = $result['countries'][0]['providers'] ?? [];
+        $correspondents = [];
+        foreach ($providers as $provider) {
+            $isOperational = collect($provider['currencies'] ?? [])
+                ->contains(fn($c) => ($c['operationTypes']['DEPOSIT']['status'] ?? null) === 'OPERATIONAL');
+            if ($isOperational) {
+                $correspondents[] = [
+                    'name' => $provider['displayName'] ?? $provider['provider'],
+                    'code' => $provider['provider'],
+                ];
+            }
+        }
+
+        if (empty($correspondents)) {
+            $notify[] = ['error', "PawaPay returned no operational DEPOSIT providers for $countryIso3 on this account."];
+            return back()->withNotify($notify);
+        }
+
+        $params->correspondents = $correspondents;
+        $gatewayCurrency->gateway_parameter = json_encode($params);
+        $gatewayCurrency->save();
+
+        $names = collect($correspondents)->pluck('name')->implode(', ');
+        $notify[] = ['success', "Synced from PawaPay: $names"];
+        return back()->withNotify($notify);
+    }
+
     public function status($id)
     {
         return Gateway::changeStatus($id);

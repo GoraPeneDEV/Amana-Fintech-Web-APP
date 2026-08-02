@@ -22,8 +22,17 @@ class PaymentController extends Controller
         // Expose the mobile money operator names (not the PawaPay correspondent
         // codes, which stay server-side) so the app can show a picker for
         // country-scoped gateways instead of forcing a single fixed operator.
-        $gatewayCurrency->each(function ($currency) {
-            $currency->operators = $this->operatorNames($currency);
+        // Also try to pre-select the right one via PawaPay's own predict-provider
+        // API using the user's own phone number, so the picker starts on the
+        // most likely answer instead of nothing (silently skipped on any
+        // failure — this is a convenience default, never required).
+        $mobileNumber = auth()->user()->mobileNumber ?? null;
+        $gatewayCurrency->each(function ($currency) use ($mobileNumber) {
+            $operators = $this->operatorNames($currency);
+            $currency->operators = $operators;
+            $currency->predicted_operator = count($operators) > 1
+                ? $this->predictOperator($currency, $mobileNumber, $operators)
+                : null;
         });
 
         $notify[] = 'Add Money Methods';
@@ -82,6 +91,65 @@ class PaymentController extends Controller
             ->filter()
             ->values()
             ->all();
+    }
+
+    /**
+     * Calls PawaPay's POST /v2/predict-provider with the user's own phone
+     * number and, if the predicted provider code matches one of this
+     * currency's configured correspondents, returns that operator's name so
+     * the app can pre-select it. Returns null on any failure/mismatch — this
+     * is purely a convenience default, the picker always stays available.
+     */
+    private function predictOperator($currency, $mobileNumber, $operatorNames)
+    {
+        if (empty($mobileNumber)) {
+            return null;
+        }
+
+        $params = json_decode($currency->gateway_parameter ?? '{}');
+        $environment = strtolower($params->environment ?? 'sandbox');
+        $baseUrl = $environment === 'production' ? 'https://api.pawapay.io' : 'https://api.sandbox.pawapay.io';
+
+        try {
+            $ch = curl_init($baseUrl . '/v2/predict-provider');
+            curl_setopt_array($ch, [
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => json_encode(['phoneNumber' => ltrim($mobileNumber, '+')]),
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_TIMEOUT => 5, // best-effort, never let this hold up the deposit-methods list
+                CURLOPT_HTTPHEADER => [
+                    'Content-Type: application/json',
+                    'Authorization: Bearer ' . ($params->api_token ?? ''),
+                ],
+            ]);
+            $response = curl_exec($ch);
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+
+            if ($httpCode !== 200) {
+                return null;
+            }
+
+            $predictedCode = json_decode($response, true)['provider'] ?? null;
+            if (!$predictedCode) {
+                return null;
+            }
+
+            $correspondents = $params->correspondents ?? [];
+            if (is_string($correspondents)) {
+                $correspondents = json_decode($correspondents);
+            }
+
+            foreach ($correspondents as $item) {
+                if (($item->code ?? null) === $predictedCode) {
+                    return $item->name ?? null;
+                }
+            }
+        } catch (\Throwable $e) {
+            return null;
+        }
+
+        return null;
     }
 
     public function depositInsert(Request $request)

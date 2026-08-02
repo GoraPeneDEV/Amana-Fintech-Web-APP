@@ -92,7 +92,16 @@
                                                             value="{{ $gatewayCurrency->name }}" required>
                                                     </div>
                                                 </div>
-                                                <div class="remove-btn">
+                                                <div class="remove-btn d-flex gap-2">
+                                                    @if ($gateway->alias === 'PawaPay')
+                                                        <form method="POST"
+                                                            action="{{ route('admin.gateway.automatic.sync.operators', $gatewayCurrency->id) }}">
+                                                            @csrf
+                                                            <button type="submit" class="btn btn--primary">
+                                                                <i class="la la-refresh"></i> @lang('Sync operators from PawaPay')
+                                                            </button>
+                                                        </form>
+                                                    @endif
                                                     <button type="button" class="btn btn--danger confirmationBtn"
                                                         data-question="@lang('Are you sure to delete this gateway currency?')"
                                                         data-action="{{ route('admin.gateway.automatic.remove', $gatewayCurrency->id) }}">

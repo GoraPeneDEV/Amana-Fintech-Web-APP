@@ -10,14 +10,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 /*
- * PawaPay (mobile money aggregator, Africa) — https://docs.pawapay.io/using_the_api
+ * PawaPay (mobile money aggregator, Africa) — v2 API: https://docs.pawapay.io/v2/docs/deposits
  *
  * Unlike Stripe/MercadoPago (hosted checkout redirect), a PawaPay deposit is a
  * server-initiated mobile money push: the API call returns an immediate
- * ACCEPTED/REJECTED acknowledgement, then the real result (COMPLETED/FAILED)
- * arrives later on the `ipn()` callback once the customer approves the USSD
- * prompt on their phone. The confirmation Blade view polls `status()` until
- * the callback lands, then redirects the WebView to success_url/failed_url.
+ * ACCEPTED/REJECTED/DUPLICATE_IGNORED acknowledgement, then the real result
+ * (COMPLETED/FAILED) arrives later on the `ipn()` callback once the customer
+ * approves the USSD prompt on their phone. The confirmation Blade view polls
+ * `status()` until the callback lands, then redirects to success/failed_url.
  */
 class ProcessController extends Controller
 {
@@ -31,8 +31,8 @@ class ProcessController extends Controller
             ? 'https://api.pawapay.io'
             : 'https://api.sandbox.pawapay.io';
 
-        $correspondent = static::resolveCorrespondent($gatewayAcc, $deposit);
-        if (empty($correspondent)) {
+        $provider = static::resolveCorrespondent($gatewayAcc, $deposit);
+        if (empty($provider)) {
             $send['error'] = true;
             $send['message'] = 'This mobile money operator is not configured yet. Please contact support.';
             return json_encode($send);
@@ -42,23 +42,24 @@ class ProcessController extends Controller
         $deposit->btc_wallet = $depositId; // generic external-reference column, reused like StripeV3's session id
         $deposit->save();
 
+        // customerMessage must be 4-22 alphanumeric/space characters (v2 constraint).
+        $customerMessage = substr(preg_replace('/[^A-Za-z0-9 ]/', '', 'Add Money ' . gs('site_name')), 0, 22);
+
         $payload = [
             'depositId' => $depositId,
             'amount' => (string) round($deposit->final_amount, 2),
             'currency' => $deposit->method_currency,
-            'country' => $gatewayAcc->country ?? '',
-            'correspondent' => $correspondent,
             'payer' => [
-                'type' => 'MSISDN',
-                'address' => [
-                    'value' => ltrim($user->mobileNumber, '+'),
+                'type' => 'MMO',
+                'accountDetails' => [
+                    'phoneNumber' => ltrim($user->mobileNumber, '+'),
+                    'provider' => $provider,
                 ],
             ],
-            'customerTimestamp' => now()->toIso8601String(),
-            'statementDescription' => substr('Add Money ' . gs('site_name'), 0, 22),
+            'customerMessage' => $customerMessage,
         ];
 
-        $ch = curl_init($baseUrl . '/deposits');
+        $ch = curl_init($baseUrl . '/v2/deposits');
         curl_setopt_array($ch, [
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => json_encode($payload),
@@ -81,7 +82,7 @@ class ProcessController extends Controller
             return json_encode($send);
         }
 
-        if (in_array($result['status'], ['ACCEPTED', 'ENQUEUED'])) {
+        if (in_array($result['status'], ['ACCEPTED', 'DUPLICATE_IGNORED'])) {
             $deposit->status = Status::PAYMENT_PENDING;
             $deposit->save();
 
@@ -130,15 +131,22 @@ class ProcessController extends Controller
     }
 
     /**
-     * PawaPay callback. Signature verification (RFC-9421) is optional on
-     * PawaPay's side and not implemented here — the lookup is scoped to a
-     * deposit still in INITIATE/PENDING state as a minimal safeguard, mirroring
-     * the idempotency guard already in PaymentController::userDataUpdate().
+     * PawaPay v2 deposit callback. Terminal statuses are COMPLETED/FAILED
+     * (REJECTED only ever comes back synchronously from the initiate call,
+     * never the callback, but is still handled here defensively). Payload
+     * shape isn't fully documented publicly, so this reads both a flat
+     * top-level shape and a `data.*`-wrapped shape (matching the status-check
+     * endpoint's wrapper) — whichever PawaPay actually sends will be picked up.
+     * Signature verification (RFC-9421) is optional on PawaPay's side and not
+     * implemented here — the lookup is scoped to a deposit still in
+     * INITIATE/PENDING state as a minimal safeguard, mirroring the idempotency
+     * guard already in PaymentController::userDataUpdate().
      */
     public function ipn(Request $request)
     {
         $payload = $request->all();
-        $depositId = $payload['depositId'] ?? ($payload['data']['depositId'] ?? null);
+        $data = $payload['data'] ?? $payload;
+        $depositId = $data['depositId'] ?? null;
 
         $deposit = Deposit::where('btc_wallet', $depositId)
             ->whereIn('status', [Status::PAYMENT_INITIATE, Status::PAYMENT_PENDING])
@@ -149,7 +157,7 @@ class ProcessController extends Controller
             return response()->json(['received' => true]);
         }
 
-        $status = $payload['status'] ?? ($payload['data']['status'] ?? null);
+        $status = $data['status'] ?? null;
 
         if ($status === 'COMPLETED') {
             PaymentController::userDataUpdate($deposit);

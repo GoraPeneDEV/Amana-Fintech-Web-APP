@@ -89,6 +89,7 @@ class DepositMethods {
     String? updatedAt,
     Method? method,
     List<String>? operators,
+    String? predictedOperator,
   }) {
     _id = id;
     _name = name;
@@ -107,6 +108,7 @@ class DepositMethods {
     _updatedAt = updatedAt;
     _method = method;
     _operators = operators ?? [];
+    _predictedOperator = predictedOperator;
   }
 
   DepositMethods.fromJson(dynamic json) {
@@ -127,6 +129,7 @@ class DepositMethods {
     _updatedAt = json['updated_at'];
     _method = json['method'] != null ? Method.fromJson(json['method']) : null;
     _operators = json['operators'] != null ? List<String>.from(json['operators'].map((v) => v.toString())) : [];
+    _predictedOperator = json['predicted_operator']?.toString();
   }
 
   int? _id;
@@ -146,6 +149,7 @@ class DepositMethods {
   String? _updatedAt;
   Method? _method;
   List<String> _operators = [];
+  String? _predictedOperator;
 
   int? get id => _id;
   String? get name => _name;
@@ -164,6 +168,7 @@ class DepositMethods {
   String? get updatedAt => _updatedAt;
   Method? get method => _method;
   List<String> get operators => _operators;
+  String? get predictedOperator => _predictedOperator;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -186,6 +191,7 @@ class DepositMethods {
       map['method'] = _method?.toJson();
     }
     map['operators'] = _operators;
+    map['predicted_operator'] = _predictedOperator;
     return map;
   }
 }

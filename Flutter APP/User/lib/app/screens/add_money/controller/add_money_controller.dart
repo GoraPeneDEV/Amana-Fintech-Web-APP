@@ -43,7 +43,9 @@ class AddMoneyController extends GetxController {
     String amt = amountController.text.toString();
     mainAmount = amt.isEmpty ? 0 : double.tryParse(amt) ?? 0;
     selectedAddMoneyMethod = method;
-    selectedOperator = null;
+    // Pre-select the operator PawaPay predicted from the user's own phone
+    // number when there's more than one to choose from; still changeable.
+    selectedOperator = (method?.operators.contains(method.predictedOperator) ?? false) ? method!.predictedOperator : null;
 
     depositLimit = '${AppConverter.formatNumber(method?.minAmount?.toString() ?? '-1')} - ${AppConverter.formatNumber(method?.maxAmount?.toString() ?? '-1')} $currency';
     changeInfoWidgetValue();
