@@ -31,6 +31,13 @@ class ProcessController extends Controller
             ? 'https://api.pawapay.io'
             : 'https://api.sandbox.pawapay.io';
 
+        $correspondent = static::resolveCorrespondent($gatewayAcc, $deposit);
+        if (empty($correspondent)) {
+            $send['error'] = true;
+            $send['message'] = 'This mobile money operator is not configured yet. Please contact support.';
+            return json_encode($send);
+        }
+
         $depositId = (string) Str::uuid();
         $deposit->btc_wallet = $depositId; // generic external-reference column, reused like StripeV3's session id
         $deposit->save();
@@ -40,7 +47,7 @@ class ProcessController extends Controller
             'amount' => (string) round($deposit->final_amount, 2),
             'currency' => $deposit->method_currency,
             'country' => $gatewayAcc->country ?? '',
-            'correspondent' => $gatewayAcc->correspondent ?? '',
+            'correspondent' => $correspondent,
             'payer' => [
                 'type' => 'MSISDN',
                 'address' => [
@@ -90,6 +97,36 @@ class ProcessController extends Controller
         $send['error'] = true;
         $send['message'] = $result['failureReason']['failureMessage'] ?? 'Deposit request rejected by PawaPay.';
         return json_encode($send);
+    }
+
+    /**
+     * Resolves the PawaPay correspondent code for this deposit: looks up the
+     * operator name the user picked (stored on Deposit::detail by
+     * Api\PaymentController::depositInsert()) inside this currency's
+     * gateway_parameter->correspondents list. Falls back to the single
+     * legacy `correspondent` field for currencies configured before the
+     * multi-operator picker existed. Returns null if nothing usable is found.
+     */
+    private static function resolveCorrespondent($gatewayAcc, $deposit)
+    {
+        $correspondents = $gatewayAcc->correspondents ?? null;
+        if (is_string($correspondents)) {
+            $correspondents = json_decode($correspondents);
+        }
+
+        if (is_array($correspondents) && count($correspondents) > 0) {
+            $operator = json_decode($deposit->detail ?? '{}')->operator ?? null;
+
+            foreach ($correspondents as $item) {
+                if (($item->name ?? null) === $operator) {
+                    return $item->code ?? null;
+                }
+            }
+
+            return null; // configured for multi-operator but no match found — don't guess
+        }
+
+        return $gatewayAcc->correspondent ?? null; // legacy single-operator config
     }
 
     /**

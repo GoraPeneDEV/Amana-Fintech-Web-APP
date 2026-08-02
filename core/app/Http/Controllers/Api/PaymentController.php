@@ -19,6 +19,13 @@ class PaymentController extends Controller
 
         $gatewayCurrency = $this->filterByUserCountry($gatewayCurrency);
 
+        // Expose the mobile money operator names (not the PawaPay correspondent
+        // codes, which stay server-side) so the app can show a picker for
+        // country-scoped gateways instead of forcing a single fixed operator.
+        $gatewayCurrency->each(function ($currency) {
+            $currency->operators = $this->operatorNames($currency);
+        });
+
         $notify[] = 'Add Money Methods';
 
         return apiResponse("deposit_methods", "success", $notify, [
@@ -49,6 +56,34 @@ class PaymentController extends Controller
         })->values();
     }
 
+    /**
+     * Returns the list of mobile money operator names configured for this
+     * gateway_currency (gateway_parameter->correspondents), or an empty array
+     * for gateways that don't use the operator-picker pattern. Tolerates
+     * `correspondents` being stored either as a real JSON array (fresh seed)
+     * or as a JSON-encoded string (after being round-tripped through the
+     * plain-text admin form field).
+     */
+    private function operatorNames($currency)
+    {
+        $params = json_decode($currency->gateway_parameter ?? '{}');
+        $correspondents = $params->correspondents ?? null;
+
+        if (is_string($correspondents)) {
+            $correspondents = json_decode($correspondents);
+        }
+
+        if (!is_array($correspondents)) {
+            return [];
+        }
+
+        return collect($correspondents)
+            ->pluck('name')
+            ->filter()
+            ->values()
+            ->all();
+    }
+
     public function depositInsert(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -77,6 +112,12 @@ class PaymentController extends Controller
             return apiResponse("invalid_gateway", "error", $notify);
         }
 
+        $operatorNames = $this->operatorNames($gate);
+        if (count($operatorNames) > 0 && !in_array($request->operator, $operatorNames, true)) {
+            $notify[] = 'Please select a valid mobile money operator';
+            return apiResponse("invalid_operator", "error", $notify);
+        }
+
         if ($gate->min_amount > $request->amount) {
             $notify[] = 'The amount is below the minimum limit';
             return apiResponse("below_min_limit", "error", $notify);
@@ -102,6 +143,7 @@ class PaymentController extends Controller
         $data->final_amount    = $finalAmount;
         $data->btc_amount      = 0;
         $data->btc_wallet      = "";
+        $data->detail          = $request->operator ? json_encode(['operator' => $request->operator]) : null;
 
         if ($type == 'user') {
             $data->success_url = urlPath("user.deposit.history");

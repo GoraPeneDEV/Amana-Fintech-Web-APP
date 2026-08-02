@@ -23,12 +23,14 @@ class AddMoneyRepo {
     required String amount,
     required String methodCode,
     required String currency,
+    String? operator,
   }) async {
     String url = "${UrlContainer.baseUrl}${UrlContainer.depositInsertUrl}";
     Map<String, String> map = {
       "amount": amount,
       "method_code": methodCode,
       "currency": currency,
+      if (operator != null && operator.isNotEmpty) "operator": operator,
     };
 
     ResponseModel responseModel = await ApiService.postRequest(url, map);
