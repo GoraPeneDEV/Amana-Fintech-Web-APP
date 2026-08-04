@@ -216,7 +216,13 @@ class AutomaticGatewayController extends Controller
             return back()->withNotify($notify);
         }
 
-        $params->correspondents = $correspondents;
+        // Stored as a plain "Name:CODE,Name2:CODE2" string (see
+        // Api\PaymentController::parseCorrespondents()) — no quotes/braces to
+        // escape, so it survives the admin's plain <input type="text">
+        // form field safely either way.
+        $params->correspondents = collect($correspondents)
+            ->map(fn($c) => $c['name'] . ':' . $c['code'])
+            ->implode(',');
         $gatewayCurrency->gateway_parameter = json_encode($params);
         $gatewayCurrency->save();
 

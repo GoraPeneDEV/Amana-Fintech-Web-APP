@@ -9,4 +9,5 @@
 /install/database.sql
 /install/database.sql.bak-*
 /install/sync_to_production_*.sql
+/install/hotfix_*.sql
 /assets/admin/push_config.json

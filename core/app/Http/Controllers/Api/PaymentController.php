@@ -66,30 +66,40 @@ class PaymentController extends Controller
     }
 
     /**
+     * gateway_parameter->correspondents is a plain "Name:CODE,Name2:CODE2"
+     * string (not JSON) — deliberately simple, no quotes/braces to escape, so
+     * it survives the admin's plain <input type="text"> form field and this
+     * dump's SQL string escaping without any nested-encoding ambiguity.
+     * Returns a list of ['name' => ..., 'code' => ...].
+     */
+    public static function parseCorrespondents($correspondents)
+    {
+        if (empty($correspondents) || !is_string($correspondents)) {
+            return [];
+        }
+
+        $list = [];
+        foreach (explode(',', $correspondents) as $pair) {
+            [$name, $code] = array_pad(explode(':', trim($pair), 2), 2, null);
+            if ($name && $code) {
+                $list[] = ['name' => $name, 'code' => $code];
+            }
+        }
+
+        return $list;
+    }
+
+    /**
      * Returns the list of mobile money operator names configured for this
-     * gateway_currency (gateway_parameter->correspondents), or an empty array
-     * for gateways that don't use the operator-picker pattern. Tolerates
-     * `correspondents` being stored either as a real JSON array (fresh seed)
-     * or as a JSON-encoded string (after being round-tripped through the
-     * plain-text admin form field).
+     * gateway_currency, or an empty array for gateways that don't use the
+     * operator-picker pattern.
      */
     private function operatorNames($currency)
     {
         $params = json_decode($currency->gateway_parameter ?? '{}');
-        $correspondents = $params->correspondents ?? null;
 
-        if (is_string($correspondents)) {
-            $correspondents = json_decode($correspondents);
-        }
-
-        if (!is_array($correspondents)) {
-            return [];
-        }
-
-        return collect($correspondents)
+        return collect(self::parseCorrespondents($params->correspondents ?? null))
             ->pluck('name')
-            ->filter()
-            ->values()
             ->all();
     }
 
@@ -135,14 +145,9 @@ class PaymentController extends Controller
                 return null;
             }
 
-            $correspondents = $params->correspondents ?? [];
-            if (is_string($correspondents)) {
-                $correspondents = json_decode($correspondents);
-            }
-
-            foreach ($correspondents as $item) {
-                if (($item->code ?? null) === $predictedCode) {
-                    return $item->name ?? null;
+            foreach (self::parseCorrespondents($params->correspondents ?? null) as $item) {
+                if ($item['code'] === $predictedCode) {
+                    return $item['name'];
                 }
             }
         } catch (\Throwable $e) {

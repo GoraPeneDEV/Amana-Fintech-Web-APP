@@ -103,24 +103,22 @@ class ProcessController extends Controller
     /**
      * Resolves the PawaPay correspondent code for this deposit: looks up the
      * operator name the user picked (stored on Deposit::detail by
-     * Api\PaymentController::depositInsert()) inside this currency's
-     * gateway_parameter->correspondents list. Falls back to the single
-     * legacy `correspondent` field for currencies configured before the
-     * multi-operator picker existed. Returns null if nothing usable is found.
+     * Api\PaymentController::depositInsert()) inside this currency's plain
+     * "Name:CODE,Name2:CODE2" gateway_parameter->correspondents string
+     * (see Api\PaymentController::parseCorrespondents()). Falls back to the
+     * single legacy `correspondent` field for currencies configured before
+     * the multi-operator picker existed. Returns null if nothing usable is found.
      */
     private static function resolveCorrespondent($gatewayAcc, $deposit)
     {
-        $correspondents = $gatewayAcc->correspondents ?? null;
-        if (is_string($correspondents)) {
-            $correspondents = json_decode($correspondents);
-        }
+        $correspondents = \App\Http\Controllers\Api\PaymentController::parseCorrespondents($gatewayAcc->correspondents ?? null);
 
-        if (is_array($correspondents) && count($correspondents) > 0) {
+        if (count($correspondents) > 0) {
             $operator = json_decode($deposit->detail ?? '{}')->operator ?? null;
 
             foreach ($correspondents as $item) {
-                if (($item->name ?? null) === $operator) {
-                    return $item->code ?? null;
+                if ($item['name'] === $operator) {
+                    return $item['code'];
                 }
             }
 
