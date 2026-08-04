@@ -746,7 +746,6 @@ Route::middleware('admin')->group(function () {
             Route::post('update/{code}', 'update')->name('update');
             Route::post('remove/{id}', 'remove')->name('remove');
             Route::post('status/{id}', 'status')->name('status');
-            Route::post('sync-operators/{id}', 'syncOperators')->name('sync.operators');
         });
     });
 

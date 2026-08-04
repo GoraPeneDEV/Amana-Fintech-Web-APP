@@ -37,23 +37,13 @@ class AddMoneyController extends GetxController {
   double rate = 1;
   double mainAmount = 0;
 
-  String? selectedOperator;
-
   void setPaymentMethod(DepositMethods? method) {
     String amt = amountController.text.toString();
     mainAmount = amt.isEmpty ? 0 : double.tryParse(amt) ?? 0;
     selectedAddMoneyMethod = method;
-    // Pre-select the operator PawaPay predicted from the user's own phone
-    // number when there's more than one to choose from; still changeable.
-    selectedOperator = (method?.operators.contains(method.predictedOperator) ?? false) ? method!.predictedOperator : null;
 
     depositLimit = '${AppConverter.formatNumber(method?.minAmount?.toString() ?? '-1')} - ${AppConverter.formatNumber(method?.maxAmount?.toString() ?? '-1')} $currency';
     changeInfoWidgetValue();
-    update();
-  }
-
-  void setOperator(String operator) {
-    selectedOperator = operator;
     update();
   }
 
@@ -89,11 +79,6 @@ class AddMoneyController extends GetxController {
       return;
     }
 
-    if ((selectedAddMoneyMethod?.operators.isNotEmpty ?? false) && (selectedOperator == null || selectedOperator!.isEmpty)) {
-      CustomSnackBar.error(errorList: [MyStrings.selectOperator.tr]);
-      return;
-    }
-
     String amount = amountController.text.toString();
     if (amount.isEmpty) {
       CustomSnackBar.error(errorList: [MyStrings.enterAmount.tr]);
@@ -108,7 +93,6 @@ class AddMoneyController extends GetxController {
         amount: amount,
         methodCode: selectedAddMoneyMethod?.methodCode ?? "",
         currency: selectedAddMoneyMethod?.currency ?? "",
-        operator: selectedOperator,
       );
 
       if (responseModel.statusCode == 200) {

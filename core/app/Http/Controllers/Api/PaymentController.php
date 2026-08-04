@@ -17,144 +17,12 @@ class PaymentController extends Controller
             $gate->where('status', Status::ENABLE);
         })->with('method')->orderby('method_code')->get();
 
-        $gatewayCurrency = $this->filterByUserCountry($gatewayCurrency);
-
-        // Expose the mobile money operator names (not the PawaPay correspondent
-        // codes, which stay server-side) so the app can show a picker for
-        // country-scoped gateways instead of forcing a single fixed operator.
-        // Also try to pre-select the right one via PawaPay's own predict-provider
-        // API using the user's own phone number, so the picker starts on the
-        // most likely answer instead of nothing (silently skipped on any
-        // failure — this is a convenience default, never required).
-        $mobileNumber = auth()->user()->mobileNumber ?? null;
-        $gatewayCurrency->each(function ($currency) use ($mobileNumber) {
-            $operators = $this->operatorNames($currency);
-            $currency->operators = $operators;
-            $currency->predicted_operator = count($operators) > 1
-                ? $this->predictOperator($currency, $mobileNumber, $operators)
-                : null;
-        });
-
         $notify[] = 'Add Money Methods';
 
         return apiResponse("deposit_methods", "success", $notify, [
             'methods'    => $gatewayCurrency,
             'image_path' => getFilePath('gateway')
         ]);
-    }
-
-    /**
-     * Country-scoped gateways (e.g. PawaPay mobile money) configure a separate
-     * gateway_currency per country/correspondent, with the country code stored
-     * in gateway_parameter->country. For those, only surface the entry matching
-     * the connected user's own country_code, so a user in Gabon automatically
-     * sees the XAF option and a user in Senegal automatically sees XOF, instead
-     * of manually picking a currency. Gateways whose currencies have no
-     * `country` in their parameters (Stripe, InTouch, ...) are left untouched.
-     */
-    private function filterByUserCountry($gatewayCurrency)
-    {
-        $userCountryCode = auth()->user()->country_code ?? null;
-
-        return $gatewayCurrency->filter(function ($currency) use ($userCountryCode) {
-            $params = json_decode($currency->gateway_parameter ?? '{}');
-            if (!isset($params->country) || $params->country === '') {
-                return true;
-            }
-            return $userCountryCode && strcasecmp($params->country, $userCountryCode) === 0;
-        })->values();
-    }
-
-    /**
-     * gateway_parameter->correspondents is a plain "Name:CODE,Name2:CODE2"
-     * string (not JSON) — deliberately simple, no quotes/braces to escape, so
-     * it survives the admin's plain <input type="text"> form field and this
-     * dump's SQL string escaping without any nested-encoding ambiguity.
-     * Returns a list of ['name' => ..., 'code' => ...].
-     */
-    public static function parseCorrespondents($correspondents)
-    {
-        if (empty($correspondents) || !is_string($correspondents)) {
-            return [];
-        }
-
-        $list = [];
-        foreach (explode(',', $correspondents) as $pair) {
-            [$name, $code] = array_pad(explode(':', trim($pair), 2), 2, null);
-            if ($name && $code) {
-                $list[] = ['name' => $name, 'code' => $code];
-            }
-        }
-
-        return $list;
-    }
-
-    /**
-     * Returns the list of mobile money operator names configured for this
-     * gateway_currency, or an empty array for gateways that don't use the
-     * operator-picker pattern.
-     */
-    private function operatorNames($currency)
-    {
-        $params = json_decode($currency->gateway_parameter ?? '{}');
-
-        return collect(self::parseCorrespondents($params->correspondents ?? null))
-            ->pluck('name')
-            ->all();
-    }
-
-    /**
-     * Calls PawaPay's POST /v2/predict-provider with the user's own phone
-     * number and, if the predicted provider code matches one of this
-     * currency's configured correspondents, returns that operator's name so
-     * the app can pre-select it. Returns null on any failure/mismatch — this
-     * is purely a convenience default, the picker always stays available.
-     */
-    private function predictOperator($currency, $mobileNumber, $operatorNames)
-    {
-        if (empty($mobileNumber)) {
-            return null;
-        }
-
-        $params = json_decode($currency->gateway_parameter ?? '{}');
-        $environment = strtolower($params->environment ?? 'sandbox');
-        $baseUrl = $environment === 'production' ? 'https://api.pawapay.io' : 'https://api.sandbox.pawapay.io';
-
-        try {
-            $ch = curl_init($baseUrl . '/v2/predict-provider');
-            curl_setopt_array($ch, [
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => json_encode(['phoneNumber' => ltrim($mobileNumber, '+')]),
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_TIMEOUT => 5, // best-effort, never let this hold up the deposit-methods list
-                CURLOPT_HTTPHEADER => [
-                    'Content-Type: application/json',
-                    'Authorization: Bearer ' . ($params->api_token ?? ''),
-                ],
-            ]);
-            $response = curl_exec($ch);
-            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            curl_close($ch);
-
-            if ($httpCode !== 200) {
-                return null;
-            }
-
-            $predictedCode = json_decode($response, true)['provider'] ?? null;
-            if (!$predictedCode) {
-                return null;
-            }
-
-            foreach (self::parseCorrespondents($params->correspondents ?? null) as $item) {
-                if ($item['code'] === $predictedCode) {
-                    return $item['name'];
-                }
-            }
-        } catch (\Throwable $e) {
-            return null;
-        }
-
-        return null;
     }
 
     public function depositInsert(Request $request)
@@ -185,12 +53,6 @@ class PaymentController extends Controller
             return apiResponse("invalid_gateway", "error", $notify);
         }
 
-        $operatorNames = $this->operatorNames($gate);
-        if (count($operatorNames) > 0 && !in_array($request->operator, $operatorNames, true)) {
-            $notify[] = 'Please select a valid mobile money operator';
-            return apiResponse("invalid_operator", "error", $notify);
-        }
-
         if ($gate->min_amount > $request->amount) {
             $notify[] = 'The amount is below the minimum limit';
             return apiResponse("below_min_limit", "error", $notify);
@@ -216,7 +78,6 @@ class PaymentController extends Controller
         $data->final_amount    = $finalAmount;
         $data->btc_amount      = 0;
         $data->btc_wallet      = "";
-        $data->detail          = $request->operator ? json_encode(['operator' => $request->operator]) : null;
 
         if ($type == 'user') {
             $data->success_url = urlPath("user.deposit.history");

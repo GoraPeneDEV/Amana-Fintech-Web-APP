@@ -12,12 +12,29 @@ use Illuminate\Support\Str;
 /*
  * PawaPay (mobile money aggregator, Africa) — v2 API: https://docs.pawapay.io/v2/docs/deposits
  *
- * Unlike Stripe/MercadoPago (hosted checkout redirect), a PawaPay deposit is a
- * server-initiated mobile money push: the API call returns an immediate
- * ACCEPTED/REJECTED/DUPLICATE_IGNORED acknowledgement, then the real result
- * (COMPLETED/FAILED) arrives later on the `ipn()` callback once the customer
- * approves the USSD prompt on their phone. The confirmation Blade view polls
- * `status()` until the callback lands, then redirects to success/failed_url.
+ * Configuration follows the same simple pattern as every other automatic
+ * gateway in this app (Flutterwave, Stripe, ...): only global fields
+ * (api_token, environment) plus a standard currency row per enabled
+ * currency (min/max/charge/rate) — no PawaPay-specific fields on the
+ * gateway_currency itself.
+ *
+ * The one thing PawaPay genuinely needs that others don't is a `provider`
+ * (which mobile money operator: MTN_MOMO_ZMB, ORANGE_SEN, ...). Rather than
+ * make the admin maintain a per-country/operator mapping, this is resolved
+ * automatically at deposit time via PawaPay's own POST /v2/predict-provider
+ * (https://docs.pawapay.io/v2/api-reference/toolkit/predict-provider), which
+ * takes the customer's phone number and returns the country + provider
+ * PawaPay itself would route the payment to. This is PawaPay's documented,
+ * recommended way to determine the provider — no local country/operator
+ * configuration needed at all.
+ *
+ * Unlike Stripe/MercadoPago (hosted checkout redirect), a PawaPay deposit is
+ * a server-initiated mobile money push: POST /v2/deposits returns an
+ * immediate ACCEPTED/REJECTED/DUPLICATE_IGNORED acknowledgement, then the
+ * real result (COMPLETED/FAILED) arrives later on the `ipn()` callback once
+ * the customer approves the prompt on their phone. The confirmation Blade
+ * view polls `status()` until the callback lands, then redirects to
+ * success_url/failed_url.
  */
 class ProcessController extends Controller
 {
@@ -30,16 +47,19 @@ class ProcessController extends Controller
         $baseUrl = $environment === 'production'
             ? 'https://api.pawapay.io'
             : 'https://api.sandbox.pawapay.io';
+        $apiToken = $gatewayAcc->api_token ?? '';
+        $phoneNumber = ltrim($user->mobileNumber, '+');
 
-        $provider = static::resolveCorrespondent($gatewayAcc, $deposit);
-        if (empty($provider)) {
+        $prediction = static::predictProvider($baseUrl, $apiToken, $phoneNumber);
+        if (!$prediction) {
             $send['error'] = true;
-            $send['message'] = 'This mobile money operator is not configured yet. Please contact support.';
+            $send['message'] = "We couldn't detect a mobile money operator for this phone number. Please check the number on your profile and try again.";
             return json_encode($send);
         }
 
         $depositId = (string) Str::uuid();
         $deposit->btc_wallet = $depositId; // generic external-reference column, reused like StripeV3's session id
+        $deposit->detail = json_encode(['provider' => $prediction['provider'], 'country' => $prediction['country']]);
         $deposit->save();
 
         // customerMessage must be 4-22 alphanumeric/space characters (v2 constraint).
@@ -52,8 +72,8 @@ class ProcessController extends Controller
             'payer' => [
                 'type' => 'MMO',
                 'accountDetails' => [
-                    'phoneNumber' => ltrim($user->mobileNumber, '+'),
-                    'provider' => $provider,
+                    'phoneNumber' => $phoneNumber,
+                    'provider' => $prediction['provider'],
                 ],
             ],
             'customerMessage' => $customerMessage,
@@ -67,7 +87,7 @@ class ProcessController extends Controller
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTPHEADER => [
                 'Content-Type: application/json',
-                'Authorization: Bearer ' . ($gatewayAcc->api_token ?? ''),
+                'Authorization: Bearer ' . $apiToken,
             ],
         ]);
         $response = curl_exec($ch);
@@ -101,31 +121,39 @@ class ProcessController extends Controller
     }
 
     /**
-     * Resolves the PawaPay correspondent code for this deposit: looks up the
-     * operator name the user picked (stored on Deposit::detail by
-     * Api\PaymentController::depositInsert()) inside this currency's plain
-     * "Name:CODE,Name2:CODE2" gateway_parameter->correspondents string
-     * (see Api\PaymentController::parseCorrespondents()). Falls back to the
-     * single legacy `correspondent` field for currencies configured before
-     * the multi-operator picker existed. Returns null if nothing usable is found.
+     * POST /v2/predict-provider — returns ['country' => 'GAB', 'provider' =>
+     * 'AIRTEL_GAB'] for a valid phone number, or null on any failure. This is
+     * the ONLY place a "country"/"provider" concept exists in this
+     * integration; nothing is stored per-currency in the DB for it.
      */
-    private static function resolveCorrespondent($gatewayAcc, $deposit)
+    private static function predictProvider($baseUrl, $apiToken, $phoneNumber)
     {
-        $correspondents = \App\Http\Controllers\Api\PaymentController::parseCorrespondents($gatewayAcc->correspondents ?? null);
+        $ch = curl_init($baseUrl . '/v2/predict-provider');
+        curl_setopt_array($ch, [
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => json_encode(['phoneNumber' => $phoneNumber]),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 15,
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: application/json',
+                'Authorization: Bearer ' . $apiToken,
+            ],
+        ]);
+        $response = curl_exec($ch);
+        $curlError = curl_error($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
 
-        if (count($correspondents) > 0) {
-            $operator = json_decode($deposit->detail ?? '{}')->operator ?? null;
-
-            foreach ($correspondents as $item) {
-                if ($item['name'] === $operator) {
-                    return $item['code'];
-                }
-            }
-
-            return null; // configured for multi-operator but no match found — don't guess
+        if ($curlError || $httpCode !== 200) {
+            return null;
         }
 
-        return $gatewayAcc->correspondent ?? null; // legacy single-operator config
+        $result = json_decode($response, true);
+        if (empty($result['provider']) || empty($result['country'])) {
+            return null;
+        }
+
+        return ['provider' => $result['provider'], 'country' => $result['country']];
     }
 
     /**

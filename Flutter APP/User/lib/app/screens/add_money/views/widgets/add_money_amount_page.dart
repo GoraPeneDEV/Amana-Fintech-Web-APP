@@ -72,36 +72,6 @@ class _AddMoneyAmountPageState extends State<AddMoneyAmountPage> {
                   ),
                 ),
                 spaceDown(Dimensions.space16),
-                if (addMoneyController.selectedAddMoneyMethod?.operators.isNotEmpty ?? false) ...[
-                  CustomAppCard(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        HeaderText(
-                          text: MyStrings.selectOperator.tr,
-                          textStyle: MyTextStyle.headerH3.copyWith(
-                            color: MyColor.getHeaderTextColor(),
-                          ),
-                        ),
-                        spaceDown(Dimensions.space12),
-                        Wrap(
-                          spacing: Dimensions.space8,
-                          runSpacing: Dimensions.space8,
-                          children: (addMoneyController.selectedAddMoneyMethod?.operators ?? []).map((operator) {
-                            return CustomAppChip(
-                              isSelected: operator == addMoneyController.selectedOperator,
-                              text: operator,
-                              onTap: () {
-                                addMoneyController.setOperator(operator);
-                              },
-                            );
-                          }).toList(),
-                        ),
-                      ],
-                    ),
-                  ),
-                  spaceDown(Dimensions.space16),
-                ],
                 CustomAppCard(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
