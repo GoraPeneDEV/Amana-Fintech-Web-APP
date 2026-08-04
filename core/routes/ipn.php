@@ -34,6 +34,6 @@ Route::post('sslcommerz', 'SslCommerz\ProcessController@ipn')->name('SslCommerz'
 Route::post('aamarpay', 'Aamarpay\ProcessController@ipn')->name('Aamarpay');
 Route::get('binance', 'Binance\ProcessController@ipn')->name('Binance');
 Route::post('pawapay', 'PawaPay\ProcessController@ipn')->name('PawaPay');
-Route::get('pawapay/status/{depositId}', 'PawaPay\ProcessController@status')->name('PawaPay.status');
+Route::get('pawapay/return/{depositId}', 'PawaPay\ProcessController@returnFromPaymentPage')->name('PawaPay.return');
 Route::post('in-touch', 'InTouch\ProcessController@ipn')->name('InTouch');
 Route::get('in-touch/status/{trx}', 'InTouch\ProcessController@status')->name('InTouch.status');
